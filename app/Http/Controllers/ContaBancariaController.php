@@ -57,30 +57,56 @@ class ContaBancariaController extends Controller
      */
     public function show(string $id, ContaBancaria $contas_bancarias)
     {
-        $dados_bancario = $contas_bancarias::find($id);
+        $conta_bancaria = $contas_bancarias::find($id);
+        $bancos = Bancos::orderBy('nome')->get();
 
         return view(
             'conta_bancaria.conta-bancaria-show',
-            [
-                'dados_bancario' => $dados_bancario
-            ]
+            compact(
+                'conta_bancaria',
+                'bancos',
+            )
         );
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(string $id) {}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        //converter o valor para booleano
+        $request->merge([
+            'mostra_saldo' => filter_var($request->mostra_saldo, FILTER_VALIDATE_BOOLEAN)
+        ]);
+
+        //valida dados
+        $validator = Validator::make(request()->all(), [
+            'nome' => 'required|string',
+            'banco_id' => 'required|int',
+            'saldo' => 'required',
+            'mostra_saldo' => 'required|boolean'
+        ]);
+
+        //valida o error
+        if ($validator->fails()) {
+            return response()->json([
+                'erros',
+                $validator->errors()->getMessages()
+            ], 400);
+        }
+        ContaBancaria::where('id', $id)->update([
+            "banco_id" => $request->banco_id,
+            "nome" => $request->nome,
+            "saldo" => $request->saldo,
+            "mostra_saldo" => $request->boolean('mostra_saldo')
+        ]);
+        $request->session()->flash('success');
+        return back();
     }
 
     /**
