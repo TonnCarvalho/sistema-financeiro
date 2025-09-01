@@ -3,6 +3,10 @@
 @section('content')
     <div x-data="contaBancaria">
 
+        @if (session('delete'))
+            <x-alert.alert-success message="{{ session('delete') }}" />
+        @endif
+
         @if (session('success'))
             <x-alert.alert-success message="{{ 'Criado com sucesso' }}" />
         @endif

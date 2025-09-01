@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     Auth::loginUsingId(1);
     $login = Auth::id();
-    return view('dashboard.dashboard', ['login' => $login]);
+    return view(
+        'dashboard.dashboard',
+        compact('login'));
 })->name('dashboard');
 
 Route::resource('conta-bancaria', ContaBancariaController::class)
@@ -16,7 +18,8 @@ Route::resource('conta-bancaria', ContaBancariaController::class)
         'index' => 'conta-bancaria.index',
         'store' => 'conta-bancaria.store',
         'show' => 'conta-bancaria.show',
-        'update' => 'conta-bancaria.update'
+        'update' => 'conta-bancaria.update',
+        'destroy' => 'conta-bancaria.destroy'
     ]);
 
 Route::resource('investimento', InvestimentoController::class)->names([

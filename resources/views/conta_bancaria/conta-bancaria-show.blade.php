@@ -1,11 +1,14 @@
 @extends('layout.layout')
 @section('page-title', 'Editar conta')
 @section('content')
-    <x-modal.confirma-exclusao action="" message="Deseja excluir está conta?" />
+    <x-modal.confirma-exclusao action=" {{ route('conta-bancaria.destroy', $conta_bancaria->id) }} "
+        message="Deseja excluir está conta?" />
+
+
+
     @if (session('success'))
         <x-alert.alert-success message="{{ 'Atualiza com sucesso!' }}" />
     @endif
-
     <div class="col-12" x-data="contaBancaria({{ $conta_bancaria }})">
         <div class="card">
             <form action="{{ route('conta-bancaria.update', $conta_bancaria->id) }}" method="POST"
@@ -76,7 +79,8 @@
                         <button type="submit" class="btn btn-success btn-sm py-2 px-6">
                             Salvar
                         </button>
-                        <a type="button" class="btn btn-light btn-sm py-2 mx-3" href="{{ route('conta-bancaria.index') }}">
+                        <a type="button" class="btn btn-light btn-sm py-2 mx-3"
+                            href="{{ route('conta-bancaria.index') }}">
                             Cancelar
                         </a>
                         <button type="button" class="btn btn-ghost-danger btn-sm p-2" data-bs-toggle="modal"

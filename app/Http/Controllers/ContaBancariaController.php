@@ -6,12 +6,13 @@ use App\Models\Bancos;
 use Illuminate\Http\Request;
 use App\Models\ContaBancaria;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class ContaBancariaController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $contas_bancarias = ContaBancaria::with('banco')->get();
         $bancos = Bancos::orderBy('nome')->get();
@@ -102,7 +103,7 @@ class ContaBancariaController extends Controller
         ]);
 
         $request->session()->flash('success');
-        
+
         return response()->json([
             'success' => 'Conta atualizada com sucesso'
         ], 201);
@@ -113,6 +114,9 @@ class ContaBancariaController extends Controller
      */
     public function destroy(string $id)
     {
-        dd('Excluido com sucesso');
+        ContaBancaria::destroy($id);
+
+        return redirect()->route('conta-bancaria.index')
+        ->with('delete', 'Conta excluida com sucesso!');
     }
 }

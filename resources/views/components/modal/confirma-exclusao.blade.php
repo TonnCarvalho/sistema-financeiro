@@ -7,6 +7,7 @@
             </div>
             <form action="{{ $action }}" method="POST">
                 @csrf
+                @method('delete')
                 <div class="modal-body">
                     {{ $message }}
                 </div>
