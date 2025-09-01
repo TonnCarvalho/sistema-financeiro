@@ -70,11 +70,6 @@ class ContaBancariaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id) {}
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -83,7 +78,6 @@ class ContaBancariaController extends Controller
         $request->merge([
             'mostra_saldo' => filter_var($request->mostra_saldo, FILTER_VALIDATE_BOOLEAN)
         ]);
-
         //valida dados
         $validator = Validator::make(request()->all(), [
             'nome' => 'required|string',
@@ -95,18 +89,23 @@ class ContaBancariaController extends Controller
         //valida o error
         if ($validator->fails()) {
             return response()->json([
-                'erros',
-                $validator->errors()->getMessages()
+                'errors' => $validator->errors()->getMessages()
             ], 400);
         }
+
+        //atualiza dados
         ContaBancaria::where('id', $id)->update([
             "banco_id" => $request->banco_id,
             "nome" => $request->nome,
             "saldo" => $request->saldo,
             "mostra_saldo" => $request->boolean('mostra_saldo')
         ]);
+
         $request->session()->flash('success');
-        return back();
+        
+        return response()->json([
+            'success' => 'Conta atualizada com sucesso'
+        ], 201);
     }
 
     /**

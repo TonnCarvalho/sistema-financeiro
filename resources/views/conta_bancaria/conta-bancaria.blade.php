@@ -57,19 +57,19 @@
                             Nome
                         </label>
 
-                        <input type="text" id="nome" class="form-control @error('nome') is-invalid @enderror"
-                            name="nome" placeholder="Ex: Itau" x-model="accountBank.nome" value="{{ old('nome') }}">
+                        <input type="text" id="nome" class="form-control" name="nome" placeholder="Ex: Itau"
+                            x-model="accountBank.nome" value="{{ old('nome') }}">
 
                         <template x-if="errors.nome">
-                            <span class="text-danger" x-text="errors.nome"></span>
+                            <span class="text-danger">Campo obrigatório</span>
                         </template>
 
                     </div>
 
                     <div class="mb-3">
                         <label for="banco_id" class="form-label required">Banco</label>
-                        <select name="banco_id" id="banco_id" class="form-control @error('banco_id') is-invalid @enderror"
-                            x-model="accountBank.banco_id" {{ old('banco_id') }}>
+                        <select name="banco_id" id="banco_id" class="form-control" x-model="accountBank.banco_id"
+                            {{ old('banco_id') }}>
                             <option value="" selected disabled>Selecione</option>
                             @foreach ($bancos as $banco)
                                 <option value="{{ $banco->id }}">{{ $banco->nome }}</option>
@@ -77,17 +77,17 @@
                         </select>
 
                         <template x-if="errors.banco_id">
-                            <span class="text-danger" x-text="errors.banco_id"></span>
+                            <span class="text-danger">Campo obrigatório</span>
                         </template>
                     </div>
 
                     <div class="mb-3">
                         <label for="saldo" class="form-label required">Saldo</label>
-                        <input id="saldo" class="form-control @error('saldo')is-invalid @enderror" name="saldo"
-                            value="{{ old('saldo') }}" x-model="accountBank.saldo">
+                        <input id="saldo" class="form-control " name="saldo" value="{{ old('saldo') }}"
+                            x-model="accountBank.saldo">
 
                         <template x-if="errors.saldo">
-                            <span class="text-danger" x-text="errors.saldo"></span>
+                            <span class="text-danger">Campo obrigatório</span>
                         </template>
                     </div>
 

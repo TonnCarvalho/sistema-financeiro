@@ -1,4 +1,4 @@
-export default () => {
+export default (accountBank = []) => {
     return {
         accountBank: {
             nome: '',
@@ -6,19 +6,25 @@ export default () => {
             saldo: '',
             mostra_saldo: true,
         },
+        accountBankEdit: {
+            nome: accountBank['nome'] ?? '',
+            banco_id: accountBank['banco_id'] ?? '',
+            saldo: accountBank['saldo'] ?? '',
+            mostra_saldo: accountBank['mostra_saldo'],
+        },
         errors: [],
         modal: {},
+        csrfToken: document.querySelector('#__token').getAttribute('content'),
         openModal() {
             this.modal = new bootstrap.Modal('#modal-account');
             this.modal.show();
         },
         async send() {
-
             try {
                 const response = await fetch('/conta-bancaria', {
                     method: 'POST',
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('#__token').getAttribute('content'),
+                        'X-CSRF-TOKEN': this.csrfToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
@@ -39,19 +45,43 @@ export default () => {
                 }
             } catch (error) {
                 this.validaCriarContas();
-            } finally {
+            }
+        },
+        async sendEdit(accountBankId) {
+            try {
+                const response = await fetch(`/conta-bancaria/${accountBankId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': this.csrfToken,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(this.accountBankEdit)
+                });
+                let data = await response.json();
+
+                if (!response.ok) {
+                    this.errors = data.errors;
+                    this.validaCriarContas();
+                }
+                if (response.ok) {
+                    window.location.reload();
+                    return;
+                }
+            } catch (error) {
+                this.validaCriarContas();
             }
         },
         validaCriarContas() {
             const fields = ['nome', 'banco_id', 'saldo'];
 
             fields.forEach(field => {
-                const element = document.querySelector(`#${field}`);
-                if (element) {
+                const input = document.querySelector(`#${field}`);
+                if (input) {
                     if (this.errors[field]) {
-                        element.classList.add('is-invalid');
+                        input.classList.add('is-invalid');
                     } else {
-                        element.classList.remove('is-invalid');
+                        input.classList.remove('is-invalid');
                     }
                 }
             })

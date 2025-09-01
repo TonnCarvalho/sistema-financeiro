@@ -3,11 +3,13 @@
 @section('content')
     <x-modal.confirma-exclusao action="" message="Deseja excluir está conta?" />
     @if (session('success'))
-        <x-alert.alert-success message="{{ 'Atualiza com sucesso!' }}"/>
+        <x-alert.alert-success message="{{ 'Atualiza com sucesso!' }}" />
     @endif
-    <div class="col-12">
+
+    <div class="col-12" x-data="contaBancaria({{ $conta_bancaria }})">
         <div class="card">
-            <form action="{{ route('conta-bancaria.update', $conta_bancaria->id)}}" method="POST">
+            <form action="{{ route('conta-bancaria.update', $conta_bancaria->id) }}" method="POST"
+                x-on:submit.prevent="sendEdit({{ $conta_bancaria->id }})">
                 <div class="card-body">
                     @method('PUT')
                     @csrf
@@ -15,30 +17,42 @@
 
                         <div class="mb-3">
                             <label for="nome" class="form-label required">Nome</label>
-                            <input type="text" id="nome" class="form-control" name="nome"
-                                value="{{ $conta_bancaria->nome }}">
+                            <input type="text" id="nome" name="nome" class="form-control"
+                                x-model="accountBankEdit.nome">
+
+                            <template x-if="errors.nome">
+                                <span class="text-danger">Campo obrigatório</span>
+                            </template>
                         </div>
+
 
                         <div class="mb-3">
                             <label for="banco" class="form-label">Banco</label>
-                            <select name="banco_id" id="banco" class="form-control">
+                            <select name="banco_id" id="banco_id" class="form-control" x-model="accountBankEdit.banco_id">
                                 @foreach ($bancos as $banco)
                                     <option @if ($conta_bancaria->banco_id == $banco->id) selected @endif value="{{ $banco->id }}">
                                         {{ $banco->nome }}
                                     </option>
                                 @endforeach
                             </select>
+                            <template x-if="errors.banco_id">
+                                <span class="text-danger">Campo obrigatório</span>
+                            </template>
                         </div>
 
                         <div class="mb-3">
                             <label for="saldo" class="form-label">Saldo</label>
                             <input type="text" id="saldo" class="form-control" name="saldo"
-                                value="{{ $conta_bancaria->saldo }}">
+                                x-model="accountBankEdit.saldo">
+                            <template x-if="errors.saldo">
+                                <span class="text-danger">Campo obrigatório</span>
+                            </template>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="mostra_saldo"
+                                    x-model="accountBankEdit.mostra_saldo"
                                     @if ($conta_bancaria->mostra_saldo == 1) checked @endif />
                                 <span class="form-check-label">Incluir no saldo atual</span>
                             </label>
@@ -46,7 +60,7 @@
 
                     </div>
                     <div class="card-footer d-none d-sm-block">
-                        <button type="" class="btn btn-success px-6">
+                        <button type="submit" class="btn btn-success px-6">
                             Salvar
                         </button>
                         <a type="button" class="btn btn-light mx-3" href="{{ route('conta-bancaria.index') }}">
@@ -59,7 +73,7 @@
                     </div>
 
                     <div class="card-footer d-sm-none d-flex justify-content-between">
-                        <button type="" class="btn btn-success btn-sm py-2 px-6">
+                        <button type="submit" class="btn btn-success btn-sm py-2 px-6">
                             Salvar
                         </button>
                         <a type="button" class="btn btn-light btn-sm py-2 mx-3" href="{{ route('conta-bancaria.index') }}">
