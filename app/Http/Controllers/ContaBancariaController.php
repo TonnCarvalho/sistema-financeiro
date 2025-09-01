@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bancos;
+use App\Models\Banco;
 use Illuminate\Http\Request;
 use App\Models\ContaBancaria;
+use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class ContaBancariaController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-        $contas_bancarias = ContaBancaria::with('banco')->get();
-        $bancos = Bancos::orderBy('nome')->get();
+        $contasBancarias = ContaBancaria::with('banco')->get();
+        $bancos = Banco::orderBy('nome')->get();
         return view(
             'conta_bancaria.conta-bancaria',
-            compact('contas_bancarias', 'bancos')
+            compact('contasBancarias', 'bancos')
         );
     }
 
     public function store(Request $request)
     {
-        //FAZ A VALIDAÇÃO
+        //valida dados
         $validator = Validator::make(request()->all(), [
             'nome' => 'required|string',
             'banco_id' => 'required|int',
@@ -32,39 +32,43 @@ class ContaBancariaController extends Controller
             'mostra_saldo' => 'required|boolean'
         ]);
 
-        //VALIDA OS ERROS
-        if ($validator->fails()) {
+        try {
+            //persiste no banco de dados
+            ContaBancaria::create([
+                'user_id' => Auth::id(),
+                'nome' => $request->nome,
+                'banco_id' => $request->banco_id,
+                'saldo' => $request->saldo,
+                'mostra_saldo' => $request->boolean('mostra_saldo')
+            ]);
+
+            $request->session()->flash('success', 'Conta criada com sucesso!');
+
             return response()->json([
-                'errors' => $validator->errors()->getMessages() //RETORN O ERROR PELO JSON
-            ], 400);
-        };
-
-        ContaBancaria::create([
-            'user_id' => Auth::id(),
-            'nome' => $request->nome,
-            'banco_id' => $request->banco_id,
-            'saldo' => $request->saldo,
-            'mostra_saldo' => $request->boolean('mostra_saldo')
-        ]);
-        $request->session()->flash('success', 'Conta criada com sucesso!');
-
-        return response()->json([
-            'success' => 'Conta criado com sucesso'
-        ], 201);
+                'success'
+            ], 201);
+        } catch (Exception $e) {
+            //valida o error
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => $validator->errors()->getMessages() //RETORN O ERROR PELO JSON
+                ], 422);
+            };
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id, ContaBancaria $contas_bancarias)
+    public function show(string $id, ContaBancaria $contaBancaria)
     {
-        $conta_bancaria = $contas_bancarias::find($id);
-        $bancos = Bancos::orderBy('nome')->get();
+        $contasBancarias = $contaBancaria::find($id);
+        $bancos = Banco::orderBy('nome')->get();
 
         return view(
             'conta_bancaria.conta-bancaria-show',
             compact(
-                'conta_bancaria',
+                'contasBancarias',
                 'bancos',
             )
         );
@@ -81,32 +85,34 @@ class ContaBancariaController extends Controller
         ]);
         //valida dados
         $validator = Validator::make(request()->all(), [
-            'nome' => 'required|string',
-            'banco_id' => 'required|int',
-            'saldo' => 'required',
+            'nome' => 'required|string|min:3|max:100',
+            'banco_id' => 'required|integer',
+            'saldo' => 'required|numeric|min:0',
             'mostra_saldo' => 'required|boolean'
         ]);
 
-        //valida o error
-        if ($validator->fails()) {
+        try {
+            //atualiza dados
+            ContaBancaria::where('id', $id)->update([
+                "banco_id" => $request->banco_id,
+                "nome" => $request->nome,
+                "saldo" => $request->saldo,
+                "mostra_saldo" => $request->boolean('mostra_saldo')
+            ]);
+
+            $request->session()->flash('success', 'Conta atualizada com sucesso!');
+
             return response()->json([
-                'errors' => $validator->errors()->getMessages()
-            ], 400);
+                'success'
+            ], 201);
+        } catch (Exception $e) {
+            //valida o error
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => $validator->errors()->getMessages()
+                ], 400);
+            }
         }
-
-        //atualiza dados
-        ContaBancaria::where('id', $id)->update([
-            "banco_id" => $request->banco_id,
-            "nome" => $request->nome,
-            "saldo" => $request->saldo,
-            "mostra_saldo" => $request->boolean('mostra_saldo')
-        ]);
-
-        $request->session()->flash('success', 'Conta atualizada com sucesso!');
-
-        return response()->json([
-            'success' => 'Conta atualizada com sucesso'
-        ], 201);
     }
 
     /**
@@ -117,6 +123,6 @@ class ContaBancariaController extends Controller
         ContaBancaria::destroy($id);
 
         return redirect()->route('conta-bancaria.index')
-        ->with('success', 'Conta excluida com sucesso!');
+            ->with('success', 'Conta excluida com sucesso!');
     }
 }

@@ -12,20 +12,20 @@
             <div class="card">
                 <div class="card-body">
                     <x-card.title title="Minhas Contas" buttonText="Nova conta" />
-                    @foreach ($contas_bancarias as $conta_bancaria)
-                        <a href="{{ route('conta-bancaria.show', $conta_bancaria->id) }}"
+                    @foreach ($contasBancarias as $contaBancaria)
+                        <a href="{{ route('conta-bancaria.show', $contaBancaria->id) }}"
                             class="text-decoration-none cursor-pointer ">
                             <div class="row align-items-center mb-3">
 
                                 <div class="col-auto">
                                     <span class="avatar rounded-circle"
-                                        style="background-image: url({{ $conta_bancaria->banco->image }})">
+                                        style="background-image: url({{ $contaBancaria->banco->image }})">
                                     </span>
                                 </div>
 
                                 <div class="col text-dark">
                                     <strong>
-                                        {{ $conta_bancaria->nome }}
+                                        {{ $contaBancaria->nome }}
                                     </strong>
                                 </div>
 
@@ -33,7 +33,7 @@
                                     <span class="text-secondary">Saldo</span>
                                     <br>
                                     <strong>
-                                        {{ $conta_bancaria->saldo }}
+                                        {{ $contaBancaria->saldo }}
                                     </strong>
                                 </div>
 

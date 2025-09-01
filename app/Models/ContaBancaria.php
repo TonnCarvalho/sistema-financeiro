@@ -29,6 +29,6 @@ class ContaBancaria extends Model
     
     public function banco(): belongsTo
     {
-        return $this->belongsTo(Bancos::class, 'banco_id');
+        return $this->belongsTo(Banco::class, 'banco_id');
     }
 }

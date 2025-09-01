@@ -15,6 +15,7 @@ export default (accountBank = []) => {
         errors: [],
         modal: {},
         csrfToken: document.querySelector('#__token').getAttribute('content'),
+
         openModal() {
             this.modal = new bootstrap.Modal('#modal-account');
             this.modal.show();
@@ -37,7 +38,6 @@ export default (accountBank = []) => {
                     this.errors = data.errors;
                     this.validaCriarContas();
                 }
-
                 if (response.ok) {
                     this.modal.hide();
                     window.location.reload();
@@ -64,6 +64,7 @@ export default (accountBank = []) => {
                     this.errors = data.errors;
                     this.validaCriarContas();
                 }
+
                 if (response.ok) {
                     window.location.reload();
                     return;

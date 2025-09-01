@@ -1,17 +1,17 @@
 @extends('layout.layout')
 @section('page-title', 'Editar conta')
 @section('content')
-    <x-modal.confirma-exclusao action=" {{ route('conta-bancaria.destroy', $conta_bancaria->id) }} "
+    <x-modal.confirma-exclusao action=" {{ route('conta-bancaria.destroy', $contasBancarias->id) }} "
         message="Deseja excluir está conta?" />
 
     @if (session('success'))
         <x-alert.alert-success message="{{ session('success') }}" />
     @endif
 
-    <div class="col-12" x-data="contaBancaria({{ $conta_bancaria }})">
+    <div class="col-12" x-data="contaBancaria({{ $contasBancarias }})">
         <div class="card">
-            <form action="{{ route('conta-bancaria.update', $conta_bancaria->id) }}" method="POST"
-                x-on:submit.prevent="sendEdit({{ $conta_bancaria->id }})">
+            <form action="{{ route('conta-bancaria.update', $contasBancarias->id) }}" method="POST"
+                x-on:submit.prevent="sendEdit({{ $contasBancarias->id }})">
                 <div class="card-body">
                     @method('PUT')
                     @csrf
@@ -32,7 +32,7 @@
                             <label for="banco" class="form-label">Banco</label>
                             <select name="banco_id" id="banco_id" class="form-control" x-model="accountBankEdit.banco_id">
                                 @foreach ($bancos as $banco)
-                                    <option @if ($conta_bancaria->banco_id == $banco->id) selected @endif value="{{ $banco->id }}">
+                                    <option @if ($contasBancarias->banco_id == $banco->id) selected @endif value="{{ $banco->id }}">
                                         {{ $banco->nome }}
                                     </option>
                                 @endforeach
@@ -55,7 +55,7 @@
                             <label class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="mostra_saldo"
                                     x-model="accountBankEdit.mostra_saldo"
-                                    @if ($conta_bancaria->mostra_saldo == 1) checked @endif />
+                                    @if ($contasBancarias->mostra_saldo == 1) checked @endif />
                                 <span class="form-check-label">Incluir no saldo atual</span>
                             </label>
                         </div>
