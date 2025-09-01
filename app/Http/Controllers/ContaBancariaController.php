@@ -46,7 +46,7 @@ class ContaBancariaController extends Controller
             'saldo' => $request->saldo,
             'mostra_saldo' => $request->boolean('mostra_saldo')
         ]);
-        $request->session()->flash('success');
+        $request->session()->flash('success', 'Conta criada com sucesso!');
 
         return response()->json([
             'success' => 'Conta criado com sucesso'
@@ -102,7 +102,7 @@ class ContaBancariaController extends Controller
             "mostra_saldo" => $request->boolean('mostra_saldo')
         ]);
 
-        $request->session()->flash('success');
+        $request->session()->flash('success', 'Conta atualizada com sucesso!');
 
         return response()->json([
             'success' => 'Conta atualizada com sucesso'
@@ -117,6 +117,6 @@ class ContaBancariaController extends Controller
         ContaBancaria::destroy($id);
 
         return redirect()->route('conta-bancaria.index')
-        ->with('delete', 'Conta excluida com sucesso!');
+        ->with('success', 'Conta excluida com sucesso!');
     }
 }

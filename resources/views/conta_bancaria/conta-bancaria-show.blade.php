@@ -4,11 +4,10 @@
     <x-modal.confirma-exclusao action=" {{ route('conta-bancaria.destroy', $conta_bancaria->id) }} "
         message="Deseja excluir está conta?" />
 
-
-
     @if (session('success'))
-        <x-alert.alert-success message="{{ 'Atualiza com sucesso!' }}" />
+        <x-alert.alert-success message="{{ session('success') }}" />
     @endif
+
     <div class="col-12" x-data="contaBancaria({{ $conta_bancaria }})">
         <div class="card">
             <form action="{{ route('conta-bancaria.update', $conta_bancaria->id) }}" method="POST"
