@@ -5,9 +5,6 @@
 
     @if (!empty($buttonText))
         <div>
-            {{-- <button type="button" class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               {{ $buttonText }}
-            </button> --}}
             <button type="button" class="btn btn-ghost-primary" x-on:click="$dispatch('open-form-modal')">
                 {{ $buttonText }}
             </button>
