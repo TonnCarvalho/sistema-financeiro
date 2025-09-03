@@ -25,7 +25,7 @@ class DashboardController extends Controller
             )
         );
     }
-    private function bancoUsuario($user)
+    private function bancoUsuario($user): mixed
     {
         $contaBancaria = ContaBancaria::where('user_id', $user)
             ->with('banco')
@@ -33,13 +33,14 @@ class DashboardController extends Controller
             ->get();
         return $contaBancaria;
     }
-    private function totalBanco($user)
+
+    private function totalBanco($user): mixed
     {
         $totalBanco = ContaBancaria::where('user_id', $user)
             ->get();
         return $totalBanco;
     }
-    private function totalSaldo($user)
+    private function totalSaldo($user): string
     {
         $totalSaldo = ContaBancaria::where('user_id', $user)
             ->sum('saldo');
