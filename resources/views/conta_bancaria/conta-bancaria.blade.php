@@ -1,3 +1,7 @@
+@php
+    use App\Helpers\FormataMoeda;
+@endphp
+
 @extends('layout.layout')
 @section('page-title', 'Contas Bancarias')
 @section('content')
@@ -33,7 +37,7 @@
                                     <span class="text-secondary">Saldo</span>
                                     <br>
                                     <strong>
-                                        {{ $contaBancaria->saldo }}
+                                        R$: {{ FormataMoeda::formataMoeda($contaBancaria->saldo) }}
                                     </strong>
                                 </div>
 

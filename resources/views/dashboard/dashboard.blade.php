@@ -1,8 +1,8 @@
 @extends('layout.layout')
 @section('page-title', 'Dashboard')
 
-@section('content')
 
+@section('content')
     <div class="col-6">
         <div class="card">
             <div class="card-body">
@@ -28,7 +28,7 @@
                             </strong>
                         </span>
                         <div class="col">
-                            <strong class="text-success">R$: 1.500,00</strong>
+                            <strong class="text-success">R$: 0</strong>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             </strong>
                         </span>
                         <div class="col">
-                            <strong class="text-danger">R$: 1.100,00</strong>
+                            <strong class="text-danger">R$: 0</strong>
                         </div>
                     </div>
                 </div>

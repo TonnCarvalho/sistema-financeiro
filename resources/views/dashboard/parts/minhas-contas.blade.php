@@ -1,3 +1,6 @@
+@php
+    use App\Helpers\FormataMoeda;
+@endphp
 <div class="col-sm-12 col-md-6">
     <div class="card">
 
@@ -28,10 +31,10 @@
                             {{ $banco->nome }}
                         </strong>
                     </div>
-                    <div class="col">
+                    <div class="col text-end">
                         <span class="text-primary">
                             <strong>
-                                R$ {{ $banco->saldo }}
+                                R$ {{ FormataMoeda::formataMoeda($banco->saldo) }}
                             </strong>
                         </span>
                     </div>
