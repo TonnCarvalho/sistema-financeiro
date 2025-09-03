@@ -24,7 +24,7 @@
                     <div class="col">
                         <span class="text-secondary">
                             <strong>
-                                Receitas {{ 'ID = ' . $login }}
+                                Receitas
                             </strong>
                         </span>
                         <div class="col">

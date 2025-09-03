@@ -1,17 +1,12 @@
 <?php
 
 use App\Http\Controllers\ContaBancariaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvestimentoController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    Auth::loginUsingId(1);
-    $login = Auth::id();
-    return view(
-        'dashboard.dashboard',
-        compact('login'));
-})->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])
+    ->name('dashboard');
 
 Route::resource('conta-bancaria', ContaBancariaController::class)
     ->names([

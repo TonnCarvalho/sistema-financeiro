@@ -2,7 +2,16 @@
     <div>
         <h2> {{ $title }} </h2>
     </div>
+    {{-- botao usado para ir a rota --}}
+    @if (!empty($manage))
+        <div>
+            <a href="{{ $route }}" class="btn btn-sm btn-ghost-primary ">
+                {{ $manage }}
+            </a>
+        </div>
+    @endif
 
+    {{-- botao usado em modal --}}
     @if (!empty($buttonText))
         <div>
             <button type="button" class="btn btn-ghost-primary" x-on:click="$dispatch('open-form-modal')">
