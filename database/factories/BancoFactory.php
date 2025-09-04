@@ -3,12 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Bancos;
+use App\Models\Banco;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Bancos>
  */
-class BancosFactory extends Factory
+class BancoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -53,7 +53,7 @@ class BancosFactory extends Factory
         $bancos = self::getDadosBancos();
 
         //cria os dados em sequencia
-        Bancos::factory()
+        Banco::factory()
             ->count(count($bancos))
             ->sequence(...$bancos)
             ->create();

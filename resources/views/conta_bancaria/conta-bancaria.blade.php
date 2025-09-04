@@ -53,7 +53,8 @@
                 </div>
             </div>
 
-            <x-modal.form title="Adicionar conta" action="{{ route('conta-bancaria.store') }}">
+            <x-modal.form title="Adicionar conta"
+            action="{{ route('conta-bancaria.store') }}">
                 <x-slot:form>
 
                     <div class="mb-3">

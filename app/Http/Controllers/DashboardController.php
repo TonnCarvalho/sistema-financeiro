@@ -37,7 +37,6 @@ class DashboardController extends Controller
             ->get();
         return $contaBancaria;
     }
-
     private function totalBanco($user): mixed
     {
         $totalBanco = ContaBancaria::where('user_id', $user)

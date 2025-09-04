@@ -6,9 +6,9 @@ import './blockArialHidden.js'
 import Alpine from 'alpinejs'
 
 import contaBancaria from './alpine/contaBancaria'
-
+import investimento from './alpine/investimento'
 
 window.Alpine = Alpine
 Alpine.data('contaBancaria', contaBancaria)
-
+Alpine.data('investimento', investimento)
 Alpine.start()

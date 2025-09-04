@@ -17,7 +17,7 @@ export default (accountBank = []) => {
         csrfToken: document.querySelector('#__token').getAttribute('content'),
 
         openModal() {
-            this.modal = new bootstrap.Modal('#modal-account');
+            this.modal = new bootstrap.Modal('#modal-form');
             this.modal.show();
         },
         async send() {

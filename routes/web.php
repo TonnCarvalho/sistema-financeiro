@@ -17,6 +17,8 @@ Route::resource('conta-bancaria', ContaBancariaController::class)
         'destroy' => 'conta-bancaria.destroy'
     ]);
 
-Route::resource('investimento', InvestimentoController::class)->names([
-    'index' => 'investimento.index'
-]);
+Route::resource('investimento', InvestimentoController::class)
+    ->names([
+        'index' => 'investimento.index',
+        'store' => 'investimento.store'
+    ]);

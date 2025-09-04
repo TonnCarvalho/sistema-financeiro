@@ -13,6 +13,7 @@ class ContaBancaria extends Model
     /** @use HasFactory<\Database\Factories\ContaBancariaFactory> */
     use HasFactory;
 
+    protected $table = 'contas_bancarias';
     protected $fillable = [
         'user_id',
         'banco_id',
@@ -20,13 +21,13 @@ class ContaBancaria extends Model
         'saldo',
         'mostra_saldo'
     ];
-    protected $table = 'contas_bancarias';
-    
+
+
     public function users()
     {
         return $this->hasMany(User::class);
     }
-    
+
     public function banco(): belongsTo
     {
         return $this->belongsTo(Banco::class, 'banco_id');

@@ -1,5 +1,5 @@
 <div x-data="{}" x-on:open-form-modal.window="openModal()">
-    <div class="modal fade" id="modal-account">
+    <div class="modal fade" id="modal-form">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -16,7 +16,7 @@
                             Adicionar
                         </button>
                         <button type="button" class="btn btn-light ms-auto" data-bs-dismiss="modal"
-                            data-bs-target="#modal-account" aria-label="Close">
+                            data-bs-target="#modal-form" aria-label="Close">
                             Cancelar
                         </button>
                     </div>

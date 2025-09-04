@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('investimento', function (Blueprint $table) {
+        Schema::create('investimentos', function (Blueprint $table) {
             $table->id()->primary();
             $table->foreignId('user_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('categoria_id');
+            $table->foreignId('conta_bancaria_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('nome');
             $table->decimal('valor', 8, 2);
-            $table->enum('tipo', ['cdb', 'fiis']);
-            $table->string('descricao')->nullable();
+            $table->string('tipo_investimento');
             $table->timestamps();
         });
     }

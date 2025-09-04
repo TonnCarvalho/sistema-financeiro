@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banco;
-use Illuminate\Http\Request;
 use App\Models\ContaBancaria;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,6 +24,8 @@ class ContaBancariaController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::id();
+
         //valida dados
         $validator = Validator::make(request()->all(), [
             'nome' => 'required|string',
@@ -35,7 +37,7 @@ class ContaBancariaController extends Controller
         try {
             //persiste no banco de dados
             ContaBancaria::create([
-                'user_id' => Auth::id(),
+                'user_id' => $user,
                 'nome' => $request->nome,
                 'banco_id' => $request->banco_id,
                 'saldo' => $request->saldo,
