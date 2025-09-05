@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContaBancariaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvestimentoController;
+use App\Models\Investimento;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])
@@ -23,3 +24,5 @@ Route::resource('investimento', InvestimentoController::class)
         'store' => 'investimento.store',
         'show' => 'investimento.show',
     ]);
+Route::get('investimento/{investimento}/extrato', [InvestimentoController::class, 'extratoCompleto'])
+    ->name('investimento.extrato');

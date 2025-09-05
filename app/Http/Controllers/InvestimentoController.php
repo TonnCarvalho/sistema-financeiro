@@ -18,7 +18,10 @@ class InvestimentoController extends Controller
     public function index()
     {
         $user = Auth::id();
-        $contaBancaria = ContaBancaria::where('user_id', $user)->orderBy('nome')->get();
+        $contaBancaria = ContaBancaria::where('user_id', $user)
+        ->orderBy('nome')
+        ->get();
+
         $investimento = Investimento::with('contaBancaria.banco')
             ->where('user_id', $user)
             ->get();
@@ -83,7 +86,7 @@ class InvestimentoController extends Controller
         $investimento = Investimento::with('contaBancaria.banco')
             ->find($investimento->id);
 
-        $investimentoExtrato = InvestimentoExtrato::find($investimento->id)
+        $investimentoExtrato = InvestimentoExtrato::where('investimento_id', $investimento->id)
             ->orderBy('created_at', 'DESC')
             ->limit(3)
             ->get();
@@ -93,6 +96,24 @@ class InvestimentoController extends Controller
             compact(
                 'investimento',
                 'investimentoExtrato',
+            )
+        );
+    }
+
+    public function extratoCompleto(Investimento $investimento)
+    {
+        $investimentoDetalhe = Investimento::with('contaBancaria.banco')
+        ->find($investimento->id);
+
+        $investimentoExtrato = InvestimentoExtrato::where('investimento_id',$investimento->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return view(
+            'investimento.investimento-extrato',
+            compact(
+                'investimentoExtrato',
+                'investimentoDetalhe',
             )
         );
     }

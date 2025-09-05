@@ -7,7 +7,12 @@
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <x-card.title title="Extrato" manage='Ver todo extrado' />
+            <x-card.title title="Extrato"/>
+            <div>
+                <a href="{{ route('investimento.extrato', $investimento->id) }}" class="btn btn-ghost-primary">
+                   Ver todo extrado
+                </a>
+            </div>
         </div>
         <div class="card-body">
             @foreach ($investimentoExtrato as $investimentoExtrato)
@@ -65,7 +70,7 @@
                     </div>
             @endforeach
             <div class="text-center mt-3">
-                <a href="#" class="btn btn-pill btn-primary">
+                <a href="{{ route('investimento.extrato', $investimento->id) }}" class="btn btn-pill btn-primary">
                     Ver todo o extrado
                 </a>
             </div>
