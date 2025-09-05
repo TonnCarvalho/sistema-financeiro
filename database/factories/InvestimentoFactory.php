@@ -22,7 +22,7 @@ class InvestimentoFactory extends Factory
             'nome' => 'Carro',
             'valor_bruto' => 1000,
             'valor_liquido' => 900,
-            'ganhos_perdas' => 190,
+            'ganho_perda' => 190,
             'ir_iof' => 10,
             'tipo_investimento' => 'cdb'
         ];
