@@ -85,6 +85,7 @@ class InvestimentoController extends Controller
 
         $investimentoExtrato = InvestimentoExtrato::find($investimento->id)
             ->orderBy('created_at', 'DESC')
+            ->limit(3)
             ->get();
 
         return view(
