@@ -84,8 +84,8 @@ class InvestimentoController extends Controller
             ->find($investimento->id);
 
         $investimentoExtrato = InvestimentoExtrato::find($investimento->id)
-        ->orderBy('created_at', 'DESC')
-        ->get();
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         return view(
             'investimento.investimento-show',
@@ -95,6 +95,7 @@ class InvestimentoController extends Controller
             )
         );
     }
+
 
     /**
      * Show the form for editing the specified resource.

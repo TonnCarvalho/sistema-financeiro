@@ -5,7 +5,7 @@
     {{-- botao usado para ir a rota --}}
     @if (!empty($manage))
         <div>
-            <a href="{{ $route }}" class="btn btn-sm btn-ghost-primary ">
+            <a href="{{ $route }}" class="btn btn-ghost-primary">
                 {{ $manage }}
             </a>
         </div>
@@ -19,5 +19,4 @@
             </button>
         </div>
     @endif
-
 </div>

@@ -1,5 +1,6 @@
 @php
     use App\Helpers\FormataMoeda;
+    use App\Helpers\FormataData;
 @endphp
 <div class="col-12">
     {{-- informação sobre o investimento --}}
@@ -57,7 +58,7 @@
                         Data de inicio
                     </div>
                     <div class="datagrid-content">
-                        {{ $investimento->created_at }}
+                        {{ FormataData::diaMesAno($investimento->created_at) }}
                     </div>
                 </div>
             </div>

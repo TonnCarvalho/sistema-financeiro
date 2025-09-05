@@ -1,19 +1,32 @@
 @php
     use App\Helpers\FormataMoeda;
+    use App\Helpers\FormataData;
+    use App\Helpers\FormataCalendario;
+    $mesAnterior = null;
 @endphp
 <div class="col-12">
-    <div class="card">
+    <div class="card" style="height: 30rem">
         <div class="card-header">
-            <x-card.title title="Extrato" />
+            <x-card.title title="Extrato" manage='Ver todo extrado' />
         </div>
-        <div class="card-body">
-            <div class="fs-2 mb-3 text-center">
-                <strong>Outubro</strong>
-            </div>
-            <div>
-                @foreach ($investimentoExtrato as $investimentoExtrato)
-                    <div class="hr-text text-start">
-                        27/05/2025
+        <div class="card-body card-body-scrollable">
+            @foreach ($investimentoExtrato as $investimentoExtrato)
+                @php
+                    $mesAtual = FormataCalendario::nomeDoMes($investimentoExtrato->created_at);
+                @endphp
+                <div class="m-3 text-center">
+                    @if ($mesAtual !== $mesAnterior)
+                        <div class="fs-2 m-3 text-center">
+                            <strong>{{ $mesAtual }}</strong>
+                        </div>
+                        @php
+                            $mesAnterior = $mesAtual;
+                        @endphp
+                    @endif
+                </div>
+                <div>
+                    <div class="hr-text hr-text-center">
+                        {{ FormataData::relativoDiaMesAno($investimentoExtrato->created_at) }}
                     </div>
 
                     <div class="row">
@@ -50,7 +63,11 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+            @endforeach
+            <div class="text-center mt-3">
+                <a href="#" class="btn btn-pill btn-primary">
+                    Ver todo o extrado
+                </a>
             </div>
         </div>
     </div>
