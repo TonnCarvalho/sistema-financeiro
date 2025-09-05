@@ -102,8 +102,9 @@
         </div>
 
         <div class="card-footer">
-            <button class="btn btn-primary">Guardar</button>
-            <button class="btn btn-warning">Regastar</button>
+            <button class="btn btn-primary">Guarda</button>
+            <button class="btn btn-outline-primary">Rendimento</button>
+            <button class="btn btn-warning">Resgasta</button>
         </div>
     </div>
 </div>

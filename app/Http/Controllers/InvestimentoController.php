@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContaBancaria;
 use App\Models\Investimento;
+use App\Models\InvestimentoExtrato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -81,10 +82,16 @@ class InvestimentoController extends Controller
     {
         $investimento = Investimento::with('contaBancaria.banco')
             ->find($investimento->id);
+
+        $investimentoExtrato = InvestimentoExtrato::find($investimento->id)
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
         return view(
             'investimento.investimento-show',
             compact(
-                'investimento'
+                'investimento',
+                'investimentoExtrato',
             )
         );
     }

@@ -21,4 +21,5 @@ class Investimento extends Model
     {
         return $this->belongsTo(ContaBancaria::class, 'conta_bancaria_id');
     }
+
 }

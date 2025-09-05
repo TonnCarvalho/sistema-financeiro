@@ -11,19 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('investimentos', function (Blueprint $table) {
-            $table->id()->primary();
+        Schema::create('investimento_extrato', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('conta_bancaria_id')
-                ->constrained('contas_bancarias')
+            $table->foreignId('investimento_id')
+                ->constrained('investimentos')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('nome');
-            $table->decimal('valor', 8, 2);
-            $table->string('tipo_investimento');
+            $table->decimal('valor_bruto', '10', '2')
+                ->default(0);
+            $table->decimal('valor_liquido', '10', '2')
+                ->default(0);
+            $table->decimal('ganhos_perdas', '10', '2')
+                ->default(0);
+            $table->decimal('ir_iof', '10', '2')
+                ->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('investimento');
+        Schema::dropIfExists('investimento_extrato');
     }
 };
