@@ -5,11 +5,11 @@
     $mesAnterior = null;
 @endphp
 <div class="col-12">
-    <div class="card" style="height: 30rem">
+    <div class="card">
         <div class="card-header">
             <x-card.title title="Extrato" manage='Ver todo extrado' />
         </div>
-        <div class="card-body card-body-scrollable">
+        <div class="card-body">
             @foreach ($investimentoExtrato as $investimentoExtrato)
                 @php
                     $mesAtual = FormataCalendario::nomeDoMes($investimentoExtrato->created_at);

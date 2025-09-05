@@ -6,9 +6,10 @@ use Illuminate\Support\Carbon;
 
 class FormataCalendario
 {
+    //Pega o nome do mês
     public static function nomeDoMes($data)
     {
-        $carbon = new Carbon(null, 'America/Sao_Paulo','pt_BR');
+        $carbon = new Carbon(null, 'America/Sao_Paulo', 'pt_BR');
 
         $pegarData = $carbon->parse($data); //pega a data-hora
 
