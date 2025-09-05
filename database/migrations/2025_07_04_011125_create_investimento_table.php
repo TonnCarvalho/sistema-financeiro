@@ -18,7 +18,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId('conta_bancaria_id')
-                ->constrained()
+                ->constrained('contas_bancarias')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('nome');

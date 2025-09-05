@@ -20,5 +20,6 @@ Route::resource('conta-bancaria', ContaBancariaController::class)
 Route::resource('investimento', InvestimentoController::class)
     ->names([
         'index' => 'investimento.index',
-        'store' => 'investimento.store'
+        'store' => 'investimento.store',
+        'show' => 'investimento.show',
     ]);

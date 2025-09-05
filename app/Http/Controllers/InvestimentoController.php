@@ -17,12 +17,16 @@ class InvestimentoController extends Controller
     public function index()
     {
         $user = Auth::id();
-        $banco = ContaBancaria::where('user_id', $user)->orderBy('nome')->get();
+        $contaBancaria = ContaBancaria::where('user_id', $user)->orderBy('nome')->get();
+        $investimento = Investimento::with('contaBancaria.banco')
+            ->where('user_id', $user)
+            ->get();
 
         return view(
             'investimento.investimento',
             compact(
-                'banco'
+                'contaBancaria',
+                'investimento',
             )
         );
     }
@@ -41,11 +45,11 @@ class InvestimentoController extends Controller
             'tipo_investimento' => 'required|string'
         ]);
 
-                    if ($validator->fails()) {
-                return response()->json([
-                    'errors' => $validator->errors()->getMessages()
-                ], 422);
-            }
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->getMessages()
+            ], 422);
+        }
 
         try {
             Investimento::create([
@@ -60,13 +64,11 @@ class InvestimentoController extends Controller
             return response()->json([
                 'success' => true,
             ], 201);
-
         } catch (\Exception $e) {
-            Log::error('Erro ao criar investimento: ' . $e->getMessage());
             if ($validator->fails()) {
                 return response()->json([
                     'errors' => 'Error interno',
-                     'message' => $e->getMessage() // Para debug - remova em produção
+                    'message' => $e->getMessage() // Para debug - remova em produção
                 ], 422);
             }
         }
@@ -75,9 +77,16 @@ class InvestimentoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Investimento $investimento)
     {
-        //
+        $investimento = Investimento::with('contaBancaria.banco')
+            ->find($investimento->id);
+        return view(
+            'investimento.investimento-show',
+            compact(
+                'investimento'
+            )
+        );
     }
 
     /**

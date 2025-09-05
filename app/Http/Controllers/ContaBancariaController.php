@@ -59,10 +59,10 @@ class ContaBancariaController extends Controller
         }
     }
 
-    public function show(string $id, ContaBancaria $contaBancaria)
+    public function show(string $id, ContaBancaria $contaBancaria, Banco $banco)
     {
         $contasBancarias = $contaBancaria::find($id);
-        $bancos = Banco::orderBy('nome')->get();
+        $bancos = $banco::orderBy('nome')->get();
 
         return view(
             'conta_bancaria.conta-bancaria-show',
