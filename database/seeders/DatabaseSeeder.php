@@ -5,8 +5,10 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
-use Database\Factories\BancoFactory;
+use App\Models\ContaBancaria;
+use App\Models\Investimento;
 use Illuminate\Database\Seeder;
+use Database\Factories\BancoFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,5 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         BancoFactory::criarBancosSemRepeticao();
+        ContaBancaria::factory(1)->create();
+        Investimento::factory()->create();
     }
 }

@@ -13,7 +13,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success px-5">
-                            Adicionar
+                            {{ $button }}
                         </button>
                         <button type="button" class="btn btn-light ms-auto" data-bs-dismiss="modal"
                             data-bs-target="#modal-form" aria-label="Close">

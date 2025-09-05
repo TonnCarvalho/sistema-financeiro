@@ -2,7 +2,7 @@
     use App\Helpers\FormataMoeda;
     use App\Helpers\FormataData;
 @endphp
-<div class="col-12">
+<div class="col-12" x-data="investimento">
     {{-- informação sobre o investimento --}}
     <div class="card">
         <card class="card-header">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="col">
                     <div class="card-title fs-1">
-                        R$: {{ FormataMoeda::formataMoeda($investimento->valor) }}
+                        R$: {{ FormataMoeda::formataMoeda($investimento->valor_bruto) }}
                     </div>
                     <div class="card-subtitle mt-1 fs-3">
                         {{ $investimento->nome }}
@@ -26,8 +26,8 @@
 
         </card>
         <div class="card-body">
-            <div class="datagrid">
-                <div class="datagrid-item">
+            <div class="row g-3">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         Banco
                     </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="datagrid-item">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         Tipo de investimento
                     </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="datagrid-item">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         Objetivo
                     </div>
@@ -53,7 +53,7 @@
                         {{ $investimento->nome }}
                     </div>
                 </div>
-                <div class="datagrid-item">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         Data de inicio
                     </div>
@@ -62,50 +62,64 @@
                     </div>
                 </div>
             </div>
-            <div class="datagrid mt-3">
-                <div class="datagrid-item">
+            <div class="row g-3 mt-3">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         Valor bruto
                     </div>
                     <div class="datagrid-content">
-                        R$: {{ FormataMoeda::formataMoeda(1000) }}
+                        <strong>
+                            R$: {{ FormataMoeda::formataMoeda($investimento->valor_bruto) }}
+                        </strong>
                     </div>
                 </div>
-                <div class="datagrid-item">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         Valor líquido
                     </div>
                     <div class="datagrid-content">
                         <strong class="text-success">
-                            R$: {{ FormataMoeda::formataMoeda(900) }}
+                            R$: {{ FormataMoeda::formataMoeda($investimento->valor_liquido) }}
                         </strong>
                     </div>
                 </div>
-                <div class="datagrid-item">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         Ganhos/Perdas
                     </div>
                     <div class="datagrid-content">
                         <strong class="text-success">
-                            R$: {{ FormataMoeda::formataMoeda(0) }}
+                            R$: {{ FormataMoeda::formataMoeda($investimento_ganho_perda) }}
                         </strong>
                     </div>
                 </div>
-                <div class="datagrid-item">
+                <div class="col-6 col-sm-3">
                     <div class="datagrid-title">
                         IR/IOF
                     </div>
-                    <div class="datagrid-content">
-                        R$: -{{ FormataMoeda::formataMoeda(100) }}
+                    <div class="datagrid-content text-danger">
+                        <strong>
+                            R$: -{{ FormataMoeda::formataMoeda($investimento->ir_iof) }}
+                        </strong>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="card-footer">
-            <button class="btn btn-primary">Guarda</button>
+            <button class="btn btn-primary" x-on:click='openModal()'>
+                Guarda
+            </button>
             <button class="btn btn-outline-primary">Rendimento</button>
             <button class="btn btn-warning">Resgasta</button>
         </div>
     </div>
+    <x-modal.form title="Acrescenta investimento" button='Guarda'>
+        <x-slot:form>
+            <div>
+                <label for="valor" class="form-label required">Quanto quer guarda?</label>
+                <input type="text" class="form-control">
+            </div>
+        </x-slot:form>
+    </x-modal.form>
 </div>

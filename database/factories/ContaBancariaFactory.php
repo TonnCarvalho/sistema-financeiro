@@ -17,7 +17,12 @@ class ContaBancariaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => 1,
+            'banco_id' => 1,
+            'nome' => 'Banco Inter',
+            'saldo' => 1000,
+            'status' => 'ativo',
+            'mostra_saldo' => 1
         ];
     }
 }

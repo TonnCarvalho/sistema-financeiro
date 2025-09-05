@@ -22,7 +22,14 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('nome');
-            $table->decimal('valor', 8, 2);
+            $table->decimal('valor_bruto', 10, 2)
+            ->default(0);
+            $table->decimal('valor_liquido', 10, 2)
+            ->default(0);
+            $table->decimal('ganho_perda', 10, 2)
+            ->default(0);
+            $table->decimal('ir_iof', 10, 2)
+            ->default(0);
             $table->string('tipo_investimento');
             $table->timestamps();
         });

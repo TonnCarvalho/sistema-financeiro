@@ -19,8 +19,8 @@ class InvestimentoController extends Controller
     {
         $user = Auth::id();
         $contaBancaria = ContaBancaria::where('user_id', $user)
-        ->orderBy('nome')
-        ->get();
+            ->orderBy('nome')
+            ->get();
 
         $investimento = Investimento::with('contaBancaria.banco')
             ->where('user_id', $user)
@@ -100,25 +100,6 @@ class InvestimentoController extends Controller
         );
     }
 
-    public function extratoCompleto(Investimento $investimento)
-    {
-        $investimentoDetalhe = Investimento::with('contaBancaria.banco')
-        ->find($investimento->id);
-
-        $investimentoExtrato = InvestimentoExtrato::where('investimento_id',$investimento->id)
-            ->orderBy('created_at', 'DESC')
-            ->get();
-
-        return view(
-            'investimento.investimento-extrato',
-            compact(
-                'investimentoExtrato',
-                'investimentoDetalhe',
-            )
-        );
-    }
-
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -141,5 +122,29 @@ class InvestimentoController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function guarda()
+    {
+        dd('Chegou');
+        //adicionar ao extrado
+        //acrescenta valor bruto
+        
+    }
+    public function extratoCompleto(Investimento $investimento)
+    {
+        $investimentoDetalhe = Investimento::with('contaBancaria.banco')
+            ->find($investimento->id);
+
+        $investimentoExtrato = InvestimentoExtrato::where('investimento_id', $investimento->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return view(
+            'investimento.investimento-extrato',
+            compact(
+                'investimentoExtrato',
+                'investimentoDetalhe',
+            )
+        );
     }
 }

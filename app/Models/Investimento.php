@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Models\ContaBancaria;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Investimento extends Model
 {
+    use HasFactory;
     protected $table = 'investimentos';
     protected $fillable = [
         'user_id',
