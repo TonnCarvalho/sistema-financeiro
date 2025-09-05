@@ -89,7 +89,7 @@
                     </div>
                     <div class="datagrid-content">
                         <strong class="text-success">
-                            R$: {{ FormataMoeda::formataMoeda($investimento_ganho_perda) }}
+                            R$: {{ FormataMoeda::formataMoeda($investimento->ganho_perda) }}
                         </strong>
                     </div>
                 </div>
