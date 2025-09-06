@@ -15,7 +15,7 @@ class Investimento extends Model
         'user_id',
         'conta_bancaria_id',
         'nome',
-        'valor',
+        'valor_bruto',
         'tipo_investimento'
     ];
 

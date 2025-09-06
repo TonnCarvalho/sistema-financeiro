@@ -2,6 +2,10 @@
     use App\Helpers\FormataMoeda;
     use App\Helpers\FormataData;
 @endphp
+@if (session('success'))
+    <x-alert.alert-success message="{{ session('success') }}" />
+@endif
+
 <div class="col-12" x-data="investimento">
     {{-- informação sobre o investimento --}}
     <div class="card">
@@ -108,17 +112,25 @@
 
         <div class="card-footer">
             <button class="btn btn-primary" x-on:click='openModal()'>
-                Guarda
+                Guardar
             </button>
             <button class="btn btn-outline-primary">Rendimento</button>
-            <button class="btn btn-warning">Resgasta</button>
+            <button class="btn btn-warning">Resgastar</button>
         </div>
     </div>
-    <x-modal.form title="Acrescenta investimento" button='Guarda'>
+
+    <x-modal.form title="Acrescenta investimento" button='Guardar'
+        action="{{ route('investimento.guarda', $investimento->id) }}" submit="guarda({{ $investimento->id }})">
         <x-slot:form>
             <div>
-                <label for="valor" class="form-label required">Quanto quer guarda?</label>
-                <input type="text" class="form-control">
+                <label for="guarda_valor" class="form-label required">Quanto quer guarda?</label>
+                <input type="text" class="form-control" name="guarda_valor" id="guarda_valor" x-model='guarda.valor'>
+
+                <template x-if='errors.guarda_valor'>
+                    <span class="text-danger">
+                        Campo obrigatório
+                    </span>
+                </template>
             </div>
         </x-slot:form>
     </x-modal.form>

@@ -14,6 +14,7 @@ class Form extends Component
     public function __construct(
         public string $title = '',
         public string $action = '',
+        public string $submit = 'send',
         public string $form = '',
         public string $button = 'Adicionar'
     ) {

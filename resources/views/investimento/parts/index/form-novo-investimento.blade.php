@@ -29,10 +29,10 @@
 </div>
 {{-- valor --}}
 <div class="mb-3">
-    <label for="valor" class="form-label">
+    <label for="valor_bruto" class="form-label">
         Quanto quer guardar
     </label>
-    <input type="text" class="form-control" name="valor" id="valor" x-model="investimento.valor">
+    <input type="text" class="form-control" name="valor_bruto" id="valor_bruto" x-model="investimento.valor_bruto">
 </div>
 {{-- tipo --}}
 <div class="mb-3">

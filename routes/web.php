@@ -26,3 +26,6 @@ Route::resource('investimento', InvestimentoController::class)
     ]);
 Route::get('investimento/{investimento}/extrato', [InvestimentoController::class, 'extratoCompleto'])
     ->name('investimento.extrato');
+    
+Route::post('investimento/{investimento}/guarda', [InvestimentoController::class, 'guarda'])
+    ->name('investimento.guarda');

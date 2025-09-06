@@ -6,7 +6,7 @@
                     <h5 class="modal-title">{{ $title }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ $action }}" method="POST" x-on:submit.prevent="send">
+                <form action="{{ $action }}" method="POST" x-on:submit.prevent="{{ $submit }}">
                     @csrf
                     <div class="modal-body">
                         {{ $form }}

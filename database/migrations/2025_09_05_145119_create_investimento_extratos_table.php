@@ -25,7 +25,7 @@ return new class extends Migration
                 ->default(0);
             $table->decimal('valor_liquido', '10', '2')
                 ->default(0);
-            $table->decimal('ganhos_perdas', '10', '2')
+            $table->decimal('ganho_perda', '10', '2')
                 ->default(0);
             $table->decimal('ir_iof', '10', '2')
                 ->default(0);

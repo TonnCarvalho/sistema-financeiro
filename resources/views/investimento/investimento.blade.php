@@ -1,7 +1,9 @@
-
 @extends('layout.layout')
 @section('page-title', 'Investimento')
 @section('content')
+    @if (session('success'))
+        <x-alert.alert-success message="{{ session('success') }}" />
+    @endif
     <div class="col-12" x-data="investimento">
         <div class="card">
             <div class="card-header">
