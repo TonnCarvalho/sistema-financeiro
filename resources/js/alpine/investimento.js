@@ -3,12 +3,15 @@ export default () => {
         investimento: {
             nome: '',
             conta_bancaria: '',
-            valor_bruto: '',
-            tipo_investimento: ''
+            valor_aplicado: '',
+            tipo_investimento: '',
+            data: ''
         },
         guarda: {
             valor: ''
         },
+        novo_valor_liquido: '',
+        novo_valor_bruto: '',
         errors: [],
         modal: {},
         csrfToken: document.querySelector('#__token').getAttribute('content'),
@@ -40,8 +43,9 @@ export default () => {
                     this.investimento = {
                         nome: '',
                         conta_bancaria: '',
-                        valor: '',
-                        tipo_investimento: ''
+                        valor_aplicado: '',
+                        tipo_investimento: '',
+                        data: ''
                     };
                     return;
                 }
@@ -80,6 +84,22 @@ export default () => {
             } catch (error) {
                 this.validaGuardaValor();
             }
+        },
+        investimentoCalculo() {
+            // pega valor atual da div (ex: "4.000,00")
+            let div = document.querySelector('#novo_valor_bruto');
+            let valorAtual = div.innerText;
+
+            // converte para número (remove pontos e troca vírgula por ponto)
+            let numeroAtual = parseFloat(valorAtual.replace(/\./g, '').replace(',', '.')) || 0;
+            // converte input para número
+            let numeroNovo = parseFloat(this.novo_valor_liquido.replace(/\./g, '').replace(',', '.')) || 0;
+
+            // soma
+            let soma = numeroAtual + numeroNovo;
+
+            // atualiza a div formatada
+            div.innerText = soma.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         },
         validaCriarInvestimento() {
             const fields = ['nome', 'conta_bancaria', 'tipo_investimento'];

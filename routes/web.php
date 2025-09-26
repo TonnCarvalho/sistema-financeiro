@@ -24,8 +24,14 @@ Route::resource('investimento', InvestimentoController::class)
         'store' => 'investimento.store',
         'show' => 'investimento.show',
     ]);
-Route::get('investimento/{investimento}/extrato', [InvestimentoController::class, 'extratoCompleto'])
-    ->name('investimento.extrato');
-    
-Route::post('investimento/{investimento}/guarda', [InvestimentoController::class, 'guarda'])
-    ->name('investimento.guarda');
+
+Route::controller(InvestimentoController::class)->group(function () {
+    Route::get('investimento/{investimento}/extrato',  'extratoCompleto')
+        ->name('investimento.extrato');
+    Route::post('investimento/{investimento}/guarda',  'guarda')
+        ->name('investimento.guarda');
+    Route::get('investimento/{investimento}/rendimento',  'indexRendimento')
+        ->name('investimento.rendimento');
+    Route::post('/investimento{investimento}/rendimento', 'storeRendimento')
+        ->name('investimento.storeRendimento');
+});

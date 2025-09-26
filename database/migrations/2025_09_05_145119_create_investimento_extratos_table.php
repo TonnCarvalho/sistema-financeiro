@@ -21,6 +21,8 @@ return new class extends Migration
                 ->constrained('investimentos')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->decimal('valor_aplicado', '10', '2')
+                ->default(0);
             $table->decimal('valor_bruto', '10', '2')
                 ->default(0);
             $table->decimal('valor_liquido', '10', '2')
@@ -29,7 +31,7 @@ return new class extends Migration
                 ->default(0);
             $table->decimal('ir_iof', '10', '2')
                 ->default(0);
-            $table->enum('movimento', ['guardo','rendimento','resgato'])->default('guardo');
+            $table->enum('movimento', ['entrada', 'rendimento', 'saida'])->default('entrada');
             $table->timestamps();
         });
     }

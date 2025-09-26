@@ -15,7 +15,9 @@ class Investimento extends Model
         'user_id',
         'conta_bancaria_id',
         'nome',
+        'valor_aplicado',
         'valor_bruto',
+        'valor_liquido',
         'tipo_investimento'
     ];
 
@@ -23,5 +25,4 @@ class Investimento extends Model
     {
         return $this->belongsTo(ContaBancaria::class, 'conta_bancaria_id');
     }
-
 }

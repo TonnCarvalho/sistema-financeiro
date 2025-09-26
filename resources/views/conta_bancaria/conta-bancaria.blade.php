@@ -7,10 +7,6 @@
 @section('content')
     <div x-data="contaBancaria">
 
-        @if (session('success'))
-            <x-alert.alert-success message="{{ session('success') }}" />
-        @endif
-
         <div class="col-12">
 
             <div class="card">

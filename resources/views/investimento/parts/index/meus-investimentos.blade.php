@@ -22,7 +22,7 @@
                         {{ $investimento->nome }}
                         <br>
                         <div>
-                            <strong>R$:</strong> {{ FormataMoeda::formataMoeda($investimento->valor_bruto) }}
+                            <strong>R$:</strong> {{ FormataMoeda::formataMoeda($investimento->valor_liquido) }}
                         </div>
                     </div>
                 </div>

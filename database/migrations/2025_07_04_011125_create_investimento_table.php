@@ -22,6 +22,8 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('nome');
+            $table->decimal('valor_aplicado', 10, 2)
+            ->default(0);
             $table->decimal('valor_bruto', 10, 2)
             ->default(0);
             $table->decimal('valor_liquido', 10, 2)

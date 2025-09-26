@@ -69,7 +69,7 @@
                                     <strong>Ganhos/Perdas</strong>
                                 </div>
                                 <div>
-                                    {{ FormataMoeda::formataMoeda($investimentoExtrato->ganhos_perdas) }}
+                                    {{ FormataMoeda::formataMoeda($investimentoExtrato->ganho_perda) }}
                                 </div>
                             </div>
                             <div class="col-6 col-md-3 g-2">

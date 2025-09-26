@@ -26,7 +26,6 @@ class ContaBancariaController extends Controller
     {
         $user = Auth::id();
 
-        //valida dados
         $validator = Validator::make(request()->all(), [
             'nome' => 'required|string',
             'banco_id' => 'required|int',
@@ -35,7 +34,6 @@ class ContaBancariaController extends Controller
         ]);
 
         try {
-            //persiste no banco de dados
             ContaBancaria::create([
                 'user_id' => $user,
                 'nome' => $request->nome,

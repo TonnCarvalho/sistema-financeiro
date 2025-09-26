@@ -32,8 +32,16 @@
     <label for="valor_bruto" class="form-label">
         Quanto quer guardar
     </label>
-    <input type="text" class="form-control" name="valor_bruto" id="valor_bruto" x-model="investimento.valor_bruto">
+    <input type="text" class="form-control" name="valor_aplicado" id="valor_aplicado" x-model="investimento.valor_aplicado">
 </div>
+{{-- //TODO adicionar data --}}
+{{-- data --}}
+{{-- <div class="mb-3">
+    <label for="valor_bruto" class="form-label">
+        Data de inicio
+    </label>
+    <input type="date" class="form-control" name="data" id="data" value="{{ now()->format('Y-m-d') }}" x-model="investimento.data">
+</div> --}}
 {{-- tipo --}}
 <div class="mb-3">
     <label for="tipo_investimento" class="form-label">

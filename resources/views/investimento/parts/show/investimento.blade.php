@@ -2,14 +2,11 @@
     use App\Helpers\FormataMoeda;
     use App\Helpers\FormataData;
 @endphp
-@if (session('success'))
-    <x-alert.alert-success message="{{ session('success') }}" />
-@endif
 
 <div class="col-12" x-data="investimento">
     {{-- informação sobre o investimento --}}
     <div class="card">
-        <card class="card-header">
+        <div class="card-header">
             <div class="row align-items-center">
                 <div class="col-auto">
                     <span class="avatar avatar-xl"
@@ -25,10 +22,8 @@
                         {{ $investimento->nome }}
                     </div>
                 </div>
-
             </div>
-
-        </card>
+        </div>
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-6 col-sm-3">
@@ -114,7 +109,8 @@
             <button class="btn btn-primary" x-on:click='openModal()'>
                 Guardar
             </button>
-            <button class="btn btn-outline-primary">Rendimento</button>
+            <a href="{{ route('investimento.rendimento', $investimento->id) }}" class="btn btn-outline-primary">Add
+                rendimento</a>
             <button class="btn btn-warning">Resgastar</button>
         </div>
     </div>

@@ -20,10 +20,11 @@ class InvestimentoFactory extends Factory
             'user_id' => 1,
             'conta_bancaria_id' => 1,
             'nome' => 'Carro',
-            'valor_bruto' => 1000,
-            'valor_liquido' => 900,
-            'ganho_perda' => 190,
-            'ir_iof' => 10,
+            'valor_aplicado' => 20176.92,
+            'valor_bruto' => 20498.27,
+            'valor_liquido' => 20176.92,
+            'ganho_perda' => 0,
+            'ir_iof' => 321.35,
             'tipo_investimento' => 'cdb'
         ];
     }

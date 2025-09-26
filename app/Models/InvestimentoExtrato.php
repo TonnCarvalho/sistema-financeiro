@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class InvestimentoExtrato extends Model
 {
@@ -12,6 +13,7 @@ class InvestimentoExtrato extends Model
     protected $fillable = [
         'user_id',
         'investimento_id',
+        'valor_aplicado',
         'valor_bruto',
         'valor_liquido',
         'ganho_perda',
@@ -27,5 +29,9 @@ class InvestimentoExtrato extends Model
     public function investimento(): BelongsTo
     {
         return $this->belongsTo(Investimento::class);
+    }
+    public function investimentoExtratosDiarios(): HasMany
+    {
+        return $this->hasMany(InvestimentoExtratoDiario::class, 'investimento_extrato_id');
     }
 }
