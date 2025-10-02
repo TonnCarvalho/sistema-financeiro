@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('page-title', 'Editar conta')
 @section('content')
-    <x-modal.confirma-exclusao action=" {{ route('conta-bancaria.destroy', $contasBancarias->id) }} "
+    <x-modal.confirma-exclusao action=" {{ route('conta-bancaria.delete', $contasBancarias->id) }} "
         message="Deseja excluir está conta?" />
 
     @if (session('success'))
@@ -78,8 +78,7 @@
                         <button type="submit" class="btn btn-success btn-sm py-2 px-6">
                             Salvar
                         </button>
-                        <a type="button" class="btn btn-light btn-sm py-2 mx-3"
-                            href="{{ route('conta-bancaria.index') }}">
+                        <a type="button" class="btn btn-light btn-sm py-2 mx-3" href="{{ route('conta-bancaria.index') }}">
                             Cancelar
                         </a>
                         <button type="button" class="btn btn-ghost-danger btn-sm p-2" data-bs-toggle="modal"

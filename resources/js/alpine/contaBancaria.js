@@ -22,7 +22,7 @@ export default (accountBank = []) => {
         },
         async send() {
             try {
-                const response = await fetch('/conta-bancaria', {
+                const response = await fetch('/conta-bancaria/store', {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': this.csrfToken,
@@ -49,7 +49,7 @@ export default (accountBank = []) => {
         },
         async sendEdit(accountBankId) {
             try {
-                const response = await fetch(`/conta-bancaria/${accountBankId}`, {
+                const response = await fetch(`/conta-bancaria/update/${accountBankId}`, {
                     method: 'PUT',
                     headers: {
                         'X-CSRF-TOKEN': this.csrfToken,
