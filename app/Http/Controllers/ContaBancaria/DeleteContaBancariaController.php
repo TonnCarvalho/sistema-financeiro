@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class DeleteContaBancariaController extends Controller
 {
-    public function delete(string $id)
+    public function delete(int $id)
     {
         ContaBancaria::destroy($id);
 

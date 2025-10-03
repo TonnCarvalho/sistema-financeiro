@@ -9,10 +9,10 @@ use App\Http\Controllers\Controller;
 
 class ShowContaBancariaController extends Controller
 {
-    public function show(string $id, ContaBancaria $contaBancaria, Banco $banco)
+    public function show(string $id)
     {
-        $contasBancarias = $contaBancaria::find($id);
-        $bancos = $banco::orderBy('nome')->get();
+        $contasBancarias = ContaBancaria::find($id);
+        $bancos = Banco::orderBy('nome')->get();
 
         return view(
             'conta_bancaria.conta-bancaria-show',

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UpdateContaBancariaController extends Controller
 {
-        public function update(Request $request, string $id)
+        public function update(int $id ,Request $request)
     {
         //converter o valor para booleano
         $request->merge([

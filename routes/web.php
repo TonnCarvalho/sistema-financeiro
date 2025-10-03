@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\ContaBancaria\DeleteContaBancariaController;
-use App\Http\Controllers\ContaBancaria\StoreContaBancariaController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvestimentoController;
+use App\Http\Controllers\InvestimentoCdbController;
+use App\Http\Controllers\Investimento\IndexInvestimentoController;
+use App\Http\Controllers\Investimento\ShowInvestimentoController;
+use App\Http\Controllers\Investimento\StoreInvestimentoController;
 use App\Http\Controllers\ContaBancaria\IndexContaBancariaController;
 use App\Http\Controllers\ContaBancaria\ShowContaBancariaController;
+use App\Http\Controllers\ContaBancaria\StoreContaBancariaController;
 use App\Http\Controllers\ContaBancaria\UpdateContaBancariaController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\InvestimentoCdbController;
-use App\Http\Controllers\InvestimentoController;
-use App\Models\Investimento;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContaBancaria\DeleteContaBancariaController;
 
 Route::redirect('/', '/dashboard');
 
@@ -25,17 +27,19 @@ Route::post('/conta-bancaria/store', [StoreContaBancariaController::class, 'stor
 Route::get('/conta-bancaria/show/{id}', [ShowContaBancariaController::class, 'show'])
     ->name('conta-bancaria.show');
 Route::put('/conta-bancaria/update/{id}', [UpdateContaBancariaController::class, 'update'])
-->name('conta-bancaria.update');
+    ->name('conta-bancaria.update');
 Route::delete('/conta-bancaria/delete/{id}', [DeleteContaBancariaController::class, 'delete'])
-->name('conta-bancaria.delete');
+    ->name('conta-bancaria.delete');
 
 //Investimento
-Route::resource('investimento', InvestimentoController::class)
-    ->names([
-        'index' => 'investimento.index',
-        'store' => 'investimento.store',
-        'show' => 'investimento.show',
-    ]);
+Route::get('/investimento', [IndexInvestimentoController::class, 'index'])
+    ->name('investimento.index');
+Route::get('/investimento/store', [StoreInvestimentoController::class, 'store'])
+    ->name('investimento.store');
+Route::get('/investimento/show/{id}', [ShowInvestimentoController::class, 'show'])
+    ->name('investimento.show');
+
+//Investimento CDB
 
 Route::controller(InvestimentoController::class)->group(function () {
     Route::get('investimento/{investimento}/extrato',  'extratoCompleto')
