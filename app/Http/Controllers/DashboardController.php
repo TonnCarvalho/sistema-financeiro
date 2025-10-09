@@ -12,6 +12,7 @@ class DashboardController extends Controller
     public function index()
     {
         Auth::loginUsingId(1);
+        
         $user = Auth::id();
         $bancoUsuario = $this->bancoUsuario($user);
         $totalBanco = $this->totalBanco($user);
