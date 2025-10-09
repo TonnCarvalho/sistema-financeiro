@@ -10,7 +10,7 @@
         <div class="card-header">
             <x-card.title title="Extrato" />
             <div>
-                <a href="{{ route('investimento.extrato', $investimento->id) }}" class="btn btn-ghost-primary">
+                <a href="{{ route('investimentoCdb.extratoCompletoCdb', $investimento->id) }}" class="btn btn-ghost-primary">
                     Ver todo extrado
                 </a>
             </div>
@@ -102,7 +102,7 @@
                     @endif
             @endforeach
             <div class="text-center mt-3">
-                <a href="{{ route('investimento.extrato', $investimento->id) }}" class="btn btn-pill btn-primary">
+                <a href="{{ route('investimentoCdb.extratoCompletoCdb', $investimento->id) }}" class="btn btn-pill btn-primary">
                     Ver todo o extrado
                 </a>
             </div>

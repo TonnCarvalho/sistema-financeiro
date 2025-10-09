@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('investimento.storeRendimento', $investimento->id) }}" method="POST">
+                    <form action="{{ route('investimentoCdb.insertRendimentoCdb', $investimento->id) }}" method="POST">
                         @csrf
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">

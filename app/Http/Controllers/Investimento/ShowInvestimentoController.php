@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ShowInvestimentoController extends Controller
 {
     protected int $userId;
-
+    
     public function __construct()
     {
         $this->userId = Auth::id();

@@ -3,15 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvestimentoController;
-use App\Http\Controllers\InvestimentoCdbController;
-use App\Http\Controllers\Investimento\IndexInvestimentoController;
+use App\Http\Controllers\InvestimentoCdb\ExtratoCompletoCdb;
+use App\Http\Controllers\InvestimentoCdb\InsertRendimentoCdb;
+use App\Http\Controllers\InvestimentoCdb\GuardaInvestimentoCdb;
+use App\Http\Controllers\InvestimentoCdb\IndexAddRendimentoCdb;
 use App\Http\Controllers\Investimento\ShowInvestimentoController;
+use App\Http\Controllers\Investimento\IndexInvestimentoController;
 use App\Http\Controllers\Investimento\StoreInvestimentoController;
-use App\Http\Controllers\ContaBancaria\IndexContaBancariaController;
 use App\Http\Controllers\ContaBancaria\ShowContaBancariaController;
+use App\Http\Controllers\ContaBancaria\IndexContaBancariaController;
 use App\Http\Controllers\ContaBancaria\StoreContaBancariaController;
-use App\Http\Controllers\ContaBancaria\UpdateContaBancariaController;
 use App\Http\Controllers\ContaBancaria\DeleteContaBancariaController;
+use App\Http\Controllers\ContaBancaria\UpdateContaBancariaController;
 
 Route::redirect('/', '/dashboard');
 
@@ -40,16 +43,11 @@ Route::get('/investimento/show/{id}', [ShowInvestimentoController::class, 'show'
     ->name('investimento.show');
 
 //Investimento CDB
-
-Route::controller(InvestimentoController::class)->group(function () {
-    Route::get('investimento/{investimento}/extrato',  'extratoCompleto')
-        ->name('investimento.extrato');
-    Route::post('investimento/{investimento}/guarda',  'guarda')
-        ->name('investimento.guarda');
-    Route::get('investimento/{investimento}/rendimento',  'indexRendimento')
-        ->name('investimento.rendimento');
-});
-Route::controller(InvestimentoCdbController::class)->group(function () {
-    Route::post('/investimento{investimento}/rendimento', 'storeRendimento')
-        ->name('investimento.storeRendimento');
-});
+Route::get('/investimento/cdb/guarda/{investimento}', [GuardaInvestimentoCdb::class, 'guarda'])
+->name('investimentoCbd.guarda');
+Route::get('/investimento/cdb/{investimento}', [IndexAddRendimentoCdb::class, 'indexAddRendimentoCdb'])
+->name('investimentoCdb.indexAddRendimentoCdb');
+Route::post('/investimento/cdb/{investimento}', [InsertRendimentoCdb::class, 'insertRendimentoCdb'])
+->name('investimentoCdb.insertRendimentoCdb');
+Route::get('/investimento/cdb/extrato/{investimento}', [ExtratoCompletoCdb::class, 'extratoCompletoCdb'])
+->name('investimentoCdb.extratoCompletoCdb');

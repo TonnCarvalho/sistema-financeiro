@@ -1,20 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\InvestimentoCdb;
 
-use App\Models\ContaBancaria;
 use App\Models\Investimento;
-use App\Models\InvestimentoExtrato;
-use App\Models\InvestimentoExtratoDiario;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
+use App\Models\InvestimentoExtrato;
+use App\Http\Controllers\Controller;
 
-class InvestimentoController extends Controller
+class ExtratoCompletoCdb extends Controller
 {
-    
     public function extratoCompletoCdb(Investimento $investimento)
     {
         $investimentoDetalhe = Investimento::with('contaBancaria.banco')
