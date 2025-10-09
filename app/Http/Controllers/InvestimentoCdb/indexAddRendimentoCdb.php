@@ -14,7 +14,7 @@ class indexAddRendimentoCdb extends Controller
             ->find($investimento->id);
 
         return view(
-            'investimento.investimento-rendimento',
+            'investimento.parts.rendimento_cdb.rendimento',
             compact([
                 'investimento',
             ])

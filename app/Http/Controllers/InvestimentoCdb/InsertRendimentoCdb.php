@@ -12,7 +12,7 @@ use App\Models\InvestimentoExtratoDiario;
 class InsertRendimentoCdb extends Controller
 {
     protected int $userId;
-    
+
     public function __construct()
     {
         $this->userId = Auth::id();
@@ -20,13 +20,17 @@ class InsertRendimentoCdb extends Controller
 
     public function insertRendimentoCdb(Investimento $investimento, Request $request)
     {
-        
+
         $input = $request->validate(
             [
                 'novo_valor_bruto' => 'required|numeric',
-                'novo_valor_liquido' => 'required|numeric'
+                'novo_valor_liquido' => 'required|numeric',
+                'data' => 'required|date|before_or_equal:today'
             ],
-            ['required' => 'Campo obrigatório']
+            [
+                'required' => 'Campo obrigatório',
+                'before_or_equal' => 'Data invalida'
+                ]
         );
         if ($input) {
 

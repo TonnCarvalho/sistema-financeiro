@@ -65,7 +65,7 @@
                                         <x-icons.icon-cifrao />
                                     </span>
                                     <input type="text" id="novo_valor_bruto" class="form-control form-control-lg"
-                                        name="novo_valor_bruto" autofocus>
+                                        name="novo_valor_bruto" value="{{ old('novo_valor_bruto') }}" autofocus>
                                 </div>
                             </div>
 
@@ -83,13 +83,18 @@
                                         <x-icons.icon-cifrao />
                                     </span>
                                     <input type="text" id="novo_valor_liquido" class="form-control form-control-lg"
-                                        name="novo_valor_liquido">
+                                        name="novo_valor_liquido" value="{{ old('novo_valor_liquido') }}">
                                 </div>
                             </div>
 
                             <div class="col-12 col-sm-6">
                                 <label for="novo_valor_liquido" class="form-label">
                                     Data
+                                    @error('data')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </label>
                                 <div class="input-icon">
                                     <span
@@ -105,9 +110,11 @@
                                             <path d="M4 11h16"></path>
                                             <path d="M11 15h1"></path>
                                             <path d="M12 15v3"></path>
-                                        </svg></span>
-                                    <input type="date" class="form-control" name="data"
-                                        id="datepicker-icon-prepend" value="{{ now()->format('Y-m-d') }}">
+                                        </svg>
+                                    </span>
+                                    <input type="date" class="form-control" name="data" id="datepicker-icon-prepend"
+                                        value="{{old('data', now()->format('Y-m-d')) }}">
+
                                 </div>
                             </div>
 
