@@ -36,7 +36,7 @@ class AuthLoginController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('loginError', 'Usuário ou senha incorreta');
+                ->with('loginError', 'Usuário ou senha incorreta.');
         }
 
         //cria sessão do usuário
