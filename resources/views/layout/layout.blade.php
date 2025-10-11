@@ -17,7 +17,7 @@
     <title>Document</title>
 </head>
 
-<body class="layout-boxed" data-bs-theme="" x-data="tema" x-init="carregarTema">
+<body class="layout-boxed" x-data="tema" x-init="carregarTema">
     <div class="page">
         @include('layout.parts.header')
         <div class="page-wrapper">

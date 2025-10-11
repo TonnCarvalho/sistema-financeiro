@@ -1,0 +1,3 @@
+Colocar para mudar  no Body
+ data-bs-theme-base="slate"
+    data-bs-theme-radius="0" data-bs-theme-primary="lime" data-bs-theme-font="comic"
