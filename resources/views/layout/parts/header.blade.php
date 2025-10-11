@@ -19,8 +19,18 @@
                 </svg></a>
         </div>
         <!-- END NAVBAR LOGO -->
-        <div class="navbar-nav flex-row order-md-last">
+        <div class="navbar-nav flex-row order-md-last" x-data="tema">
 
+            <template x-if="tema === 'light' || tema === '' ">
+                <a class="nav-link px-0" aria-label="Habilitar tema escuro" x-on:click="mudarTema()">
+                    <x-icons.icon-sun-outline />
+                </a>
+            </template>
+            <template x-if="tema ==='dark'">
+                <a class="nav-link px-0" aria-label="Habilitar tema claro" x-on:click="mudarTema()">
+                    <x-icons.icon-moon-outline />
+                </a>
+            </template>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
