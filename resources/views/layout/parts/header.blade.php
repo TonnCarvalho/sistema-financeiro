@@ -21,12 +21,12 @@
         <!-- END NAVBAR LOGO -->
         <div class="navbar-nav flex-row order-md-last" x-data="tema">
 
-            <template x-if="tema === 'light' || tema === '' ">
+            <template x-if="tema === 'dark'">
                 <a class="nav-link px-0" aria-label="Habilitar tema escuro" x-on:click="mudarTema()">
                     <x-icons.icon-sun-outline />
                 </a>
             </template>
-            <template x-if="tema ==='dark'">
+            <template x-if="tema ==='light' || tema === '' ">
                 <a class="nav-link px-0" aria-label="Habilitar tema claro" x-on:click="mudarTema()">
                     <x-icons.icon-moon-outline />
                 </a>
