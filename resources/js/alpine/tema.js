@@ -1,6 +1,6 @@
 export default () => {
     return {
-        tema: '',
+        tema: localStorage.getItem('tema') ?? 'light',
 
         mudarTema() {
             let temaStorage = localStorage.getItem('tema');
