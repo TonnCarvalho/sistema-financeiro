@@ -10,16 +10,18 @@
                 <p class="h3 m-0 text-secondary">
                     Receita de Julho
                 </p>
-                <p class="h2 text-secondary m-0">
-                    R$: {{ $totalSaldo }}
-                    <strong class="text-black">
+                <p class="h2 m-0">
+                    <span class="text-secondary"> R$: </span>
+                    <strong class="text-success">
+                        {{ $totalSaldo }}
                     </strong>
                 </p>
             </div>
         </div>
 
         <div class="card-body">
-            <x-card.title title="Minhas contas: {{ count($totalBanco) }}" manage="Ver todos" route="{{ route('conta-bancaria.index') }}" />
+            <x-card.title title="Minhas contas: {{ count($totalBanco) }}" manage="Ver todos"
+                route="{{ route('conta-bancaria.index') }}" />
             @foreach ($bancoUsuario as $banco)
                 <div class="row align-items-center">
                     <div class="col-auto">

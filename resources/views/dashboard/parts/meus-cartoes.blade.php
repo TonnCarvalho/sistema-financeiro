@@ -3,13 +3,14 @@
 
         <div class="card-header position-relative">
             <div class="bg-danger position-absolute rounded-pill" style="height: 60px; width: 5px"></div>
+
             <div class="ms-3">
                 <p class="h3 m-0 text-secondary">
                     Fatura de Julho
                 </p>
-                <p class="h2 text-secondary m-0">
-                    R$:
-                    <strong class="text-black">
+                <p class="h2 m-0">
+                    <span class="text-secondary"> R$: </span>
+                    <strong class="text-danger">
                         - 1.100,00
                     </strong>
                 </p>

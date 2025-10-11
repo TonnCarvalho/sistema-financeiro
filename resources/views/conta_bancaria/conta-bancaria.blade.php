@@ -14,7 +14,7 @@
                     <x-card.title title="Minhas Contas" buttonText="Nova conta" />
                     @foreach ($contasBancarias as $contaBancaria)
                         <a href="{{ route('conta-bancaria.show', $contaBancaria->id) }}"
-                            class="text-decoration-none cursor-pointer ">
+                            class="text-body cursor-pointer ">
                             <div class="row align-items-center mb-3">
 
                                 <div class="col-auto">
@@ -23,13 +23,13 @@
                                     </span>
                                 </div>
 
-                                <div class="col text-dark">
+                                <div class="col">
                                     <strong>
                                         {{ $contaBancaria->nome }}
                                     </strong>
                                 </div>
 
-                                <div class="col-auto text-center text-dark">
+                                <div class="col-auto text-center">
                                     <span class="text-secondary">Saldo</span>
                                     <br>
                                     <strong>
