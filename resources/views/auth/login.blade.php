@@ -40,7 +40,7 @@
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control @error('email') border-danger @enderror"
                                 placeholder="seu@email.com" autocomplete="off" name="email"
-                                value="{{ old('email') }}" required>
+                                value="{{ old('email', 'cleiton@email.com.br') }}" required>
                             <span class="text-danger">
                                 @error('email')
                                     {{ $message }}
@@ -76,8 +76,8 @@
                             </span>
                         </div>
                         @if (session('loginError'))
-                            <span class="alert alert-danger">
-                                {{ session('loginError') }}
+                            <span class="alert alert-danger justify-content-center">
+                                <h4 class="alert-heading text-danger"> {{ session('loginError') }} </h4>
                             </span>
                         @endif
                         <div class="form-footer">
