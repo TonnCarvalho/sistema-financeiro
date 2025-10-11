@@ -29,7 +29,7 @@
                     <div class="d-none d-xl-block ps-2">
                         <div>
                             <strong>
-                                Cleiton Carvalho
+                                {{ session('user.firstName') . ' ' . session('user.lastName') }}
                             </strong>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="#" class="dropdown-item">Perfil</a>
                     <div class="dropdown-divider"></div>
-                    <a href="" class="dropdown-item">Logout</a>
+                    <a href="{{ route('auth.logout') }}" class="dropdown-item">Logout</a>
                 </div>
             </div>
         </div>

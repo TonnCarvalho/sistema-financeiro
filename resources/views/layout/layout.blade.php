@@ -19,7 +19,7 @@
 
             <div class="page-body">
                 <div class="container-xl">
-                    
+
                     @if (session('success'))
                         <x-alert.alert-success message="{{ session('success') }}" />
                     @endif
