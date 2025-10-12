@@ -31,7 +31,6 @@ Route::middleware([IsLogin::class])->group(function () {
 
 //Middleware validação se está logado.
 Route::middleware([NotLogin::class])->group(function () {
-
     // Logout
     Route::get('/logout', [LogoutController::class, 'logout'])
         ->name('auth.logout');
@@ -42,32 +41,38 @@ Route::middleware([NotLogin::class])->group(function () {
         ->name('dashboard');
 
     //Conta Bancaria
-    Route::get('/conta-bancaria', [IndexContaBancariaController::class, 'index'])
-        ->name('conta-bancaria.index');
-    Route::post('/conta-bancaria/store', [StoreContaBancariaController::class, 'store'])
-        ->name('conta-bancaria.store');
-    Route::get('/conta-bancaria/show/{id}', [ShowContaBancariaController::class, 'show'])
-        ->name('conta-bancaria.show');
-    Route::put('/conta-bancaria/update/{id}', [UpdateContaBancariaController::class, 'update'])
-        ->name('conta-bancaria.update');
-    Route::delete('/conta-bancaria/delete/{id}', [DeleteContaBancariaController::class, 'delete'])
-        ->name('conta-bancaria.delete');
+    Route::prefix('/conta-bancaria')->group(function () {
+        Route::get('/', [IndexContaBancariaController::class, 'index'])
+            ->name('conta-bancaria.index');
+        Route::post('/store', [StoreContaBancariaController::class, 'store'])
+            ->name('conta-bancaria.store');
+        Route::get('/show/{id}', [ShowContaBancariaController::class, 'show'])
+            ->name('conta-bancaria.show');
+        Route::put('/update/{id}', [UpdateContaBancariaController::class, 'update'])
+            ->name('conta-bancaria.update');
+        Route::delete('/delete/{id}', [DeleteContaBancariaController::class, 'delete'])
+            ->name('conta-bancaria.delete');
+    });
 
     //Investimento
-    Route::get('/investimento', [IndexInvestimentoController::class, 'index'])
-        ->name('investimento.index');
-    Route::get('/investimento/store', [StoreInvestimentoController::class, 'store'])
-        ->name('investimento.store');
-    Route::get('/investimento/show/{id}', [ShowInvestimentoController::class, 'show'])
-        ->name('investimento.show');
+    Route::prefix('/investimento')->group(function () {
+        Route::get('/', [IndexInvestimentoController::class, 'index'])
+            ->name('investimento.index');
+        Route::get('/store', [StoreInvestimentoController::class, 'store'])
+            ->name('investimento.store');
+        Route::get('/show/{id}', [ShowInvestimentoController::class, 'show'])
+            ->name('investimento.show');
+    });
 
     //Investimento CDB
-    Route::get('/investimento/cdb/guarda/{investimento}', [GuardaInvestimentoCdb::class, 'guarda'])
-        ->name('investimentoCbd.guarda');
-    Route::get('/investimento/cdb/{investimento}', [IndexAddRendimentoCdb::class, 'indexAddRendimentoCdb'])
-        ->name('investimentoCdb.indexAddRendimentoCdb');
-    Route::post('/investimento/cdb/{investimento}', [InsertRendimentoCdb::class, 'insertRendimentoCdb'])
-        ->name('investimentoCdb.insertRendimentoCdb');
-    Route::get('/investimento/cdb/extrato/{investimento}', [ExtratoCompletoCdb::class, 'extratoCompletoCdb'])
-        ->name('investimentoCdb.extratoCompletoCdb');
+    Route::prefix('/investimento/cdb')->group(function () {
+        Route::get('/guarda/{investimento}', [GuardaInvestimentoCdb::class, 'guarda'])
+            ->name('investimentoCbd.guarda');
+        Route::get('/{investimento}', [IndexAddRendimentoCdb::class, 'indexAddRendimentoCdb'])
+            ->name('investimentoCdb.indexAddRendimentoCdb');
+        Route::post('/{investimento}', [InsertRendimentoCdb::class, 'insertRendimentoCdb'])
+            ->name('investimentoCdb.insertRendimentoCdb');
+        Route::get('/extrato/{investimento}', [ExtratoCompletoCdb::class, 'extratoCompletoCdb'])
+            ->name('investimentoCdb.extratoCompletoCdb');
+    });
 });
