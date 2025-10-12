@@ -58,7 +58,7 @@ Route::middleware([NotLogin::class])->group(function () {
     Route::prefix('/investimento')->group(function () {
         Route::get('/', [IndexInvestimentoController::class, 'index'])
             ->name('investimento.index');
-        Route::get('/store', [StoreInvestimentoController::class, 'store'])
+        Route::post('/store', [StoreInvestimentoController::class, 'store'])
             ->name('investimento.store');
         Route::get('/show/{id}', [ShowInvestimentoController::class, 'show'])
             ->name('investimento.show');

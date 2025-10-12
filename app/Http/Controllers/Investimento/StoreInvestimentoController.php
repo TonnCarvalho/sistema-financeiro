@@ -16,17 +16,17 @@ class StoreInvestimentoController extends Controller
 
     public function __construct()
     {
-        $this->userId = Auth::id();
+        $this->userId = session('user.id');
     }
 
     public function store(Request $request)
     {
-
         $validator = Validator::make(request()->all(), [
             'conta_bancaria' => 'required|integer',
             'nome' => 'required|string|min:3|max:255',
             'valor_aplicado' => 'nullable|numeric',
-            'tipo_investimento' => 'required|string'
+            'tipo_investimento' => 'required|string',
+            'data' => 'required|date'
         ]);
 
         if ($validator->fails()) {
@@ -48,13 +48,12 @@ class StoreInvestimentoController extends Controller
                 'created_at' => $request->data
             ]);
 
-
             InvestimentoExtrato::create([
                 'user_id' => $this->userId,
                 'investimento_id' => $investimento->id,
-                'valor_aplicado' => $request->valor_aplicado
+                'valor_aplicado' => $request->valor_aplicado,
+                'created_at' => $request->data
             ]);
-
 
             $request->session()->flash('success', 'Investimento criado com sucesso!');
 
@@ -62,6 +61,7 @@ class StoreInvestimentoController extends Controller
                 'success'
             ], 201);
         } catch (Exception $e) {
+
             if ($validator->fails()) {
                 return response()->json([
                     'errors' => 'Error interno',

@@ -19,6 +19,7 @@ class InvestimentoExtrato extends Model
         'ganho_perda',
         'ir_iof',
         'movimento',
+        'created_at',
     ];
 
     public function user(): BelongsTo

@@ -27,33 +27,44 @@
         <span class="text-danger">Campo obrigatório</span>
     </template>
 </div>
+
 {{-- valor --}}
 <div class="mb-3">
     <label for="valor_bruto" class="form-label">
         Quanto quer guardar
     </label>
-    <input type="text" class="form-control" name="valor_aplicado" id="valor_aplicado" x-model="investimento.valor_aplicado">
+    <input type="text" class="form-control" name="valor_aplicado" id="valor_aplicado"
+        x-model="investimento.valor_aplicado">
 </div>
-{{-- //TODO adicionar data --}}
-{{-- data --}}
-{{-- <div class="mb-3">
-    <label for="valor_bruto" class="form-label">
-        Data de inicio
-    </label>
-    <input type="date" class="form-control" name="data" id="data" value="{{ now()->format('Y-m-d') }}" x-model="investimento.data">
-</div> --}}
-{{-- tipo --}}
-<div class="mb-3">
-    <label for="tipo_investimento" class="form-label">
-        Qual tipo do investimento
-    </label>
-    <select name="tipo_investimento" id="tipo_investimento" class="form-control"
-        x-model="investimento.tipo_investimento">
-        <option value=""selected disabled>Selecione</option>
-        <option value="cdb">CBD</option>
-        <option value="fiis">FIIS</option>
-    </select>
-    <template x-if="errors.tipo_investimento">
-        <span class="text-danger">Campo obrigatório</span>
-    </template>
+
+
+<div class="row mb-3">
+    {{-- tipo --}}
+    <div class="col-6">
+        <label for="tipo_investimento" class="form-label required">
+            Qual tipo do investimento
+        </label>
+        <select name="tipo_investimento" id="tipo_investimento" class="form-control"
+            x-model="investimento.tipo_investimento" required>
+            <option value=""selected disabled>Selecione</option>
+            <option value="cdb">CBD</option>
+            <option value="fiis">FIIS</option>
+        </select>
+        <template x-if="errors.tipo_investimento">
+            <span class="text-danger">Campo obrigatório</span>
+        </template>
+    </div>
+    {{-- data --}}
+    <div class="col-6">
+        <label for="data" class="form-label">
+            Data de inicio
+        </label>
+        <div class="input-icon">
+            <span class="input-icon-addon">
+                <x-icons.icon-calendar-number />
+            </span>
+            <input type="date" class="form-control" name="data" id="data"
+                value="{{ old('data', now()->format('Y-m-d')) }}" x-model="investimento.data">
+        </div>
+    </div>
 </div>

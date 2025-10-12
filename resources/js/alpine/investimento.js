@@ -19,9 +19,10 @@ export default () => {
             this.modal = new bootstrap.Modal('#modal-form');
             this.modal.show();
         },
+
         async send() {
             try {
-                const response = await fetch('/investimento', {
+                const response = await fetch('/investimento/store', {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': this.csrfToken,
@@ -122,6 +123,6 @@ export default () => {
             } else {
                 input.classList.remove('is-invalid');
             }
-        }
+        },
     }
 }

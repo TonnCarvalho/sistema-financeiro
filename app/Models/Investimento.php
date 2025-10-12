@@ -18,7 +18,8 @@ class Investimento extends Model
         'valor_aplicado',
         'valor_bruto',
         'valor_liquido',
-        'tipo_investimento'
+        'tipo_investimento',
+        'created_at'
     ];
 
     public function contaBancaria(): belongsTo
