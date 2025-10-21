@@ -98,7 +98,7 @@
                                 </label>
                                 <div class="input-icon">
                                     <span
-                                        class="input-icon-addon"><!-- Download SVG icon from http://tabler.io/icons/icon/calendar -->
+                                        class="input-icon-addon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
@@ -127,7 +127,7 @@
             </div>
         </div>
         {{-- //TODO resumo de rendimento --}}
-        {{-- @include('investimento.parts.rendimento.resumo') --}}
+        {{-- @include('investimento_cdb.parts.rendimento.resumo') --}}
 
     </div>
     @vite(['resources/js/alpine/investimento.js'])

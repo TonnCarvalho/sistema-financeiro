@@ -29,7 +29,7 @@ class ShowInvestimentoController extends Controller
 
 
         return view(
-            'investimento.investimento-show',
+            'investimento_cdb.investimento-show',
             compact(
                 'investimento',
                 'investimentoExtrato',

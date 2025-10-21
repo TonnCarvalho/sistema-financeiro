@@ -66,13 +66,17 @@ Route::middleware([NotLogin::class])->group(function () {
 
     //Investimento CDB
     Route::prefix('/investimento/cdb')->group(function () {
-        Route::get('/guarda/{investimento}', [GuardaInvestimentoCdb::class, 'guarda'])
+        Route::post('/guarda/{investimento}', [GuardaInvestimentoCdb::class, 'guarda'])
             ->name('investimentoCbd.guarda');
+
         Route::get('/{investimento}', [IndexAddRendimentoCdb::class, 'indexAddRendimentoCdb'])
             ->name('investimentoCdb.indexAddRendimentoCdb');
+
         Route::post('/{investimento}', [InsertRendimentoCdb::class, 'insertRendimentoCdb'])
             ->name('investimentoCdb.insertRendimentoCdb');
+
         Route::get('/extrato/{investimento}', [ExtratoCompletoCdb::class, 'extratoCompletoCdb'])
             ->name('investimentoCdb.extratoCompletoCdb');
+            
     });
 });

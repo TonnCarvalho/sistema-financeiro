@@ -7,8 +7,9 @@ export default () => {
             tipo_investimento: '',
             data: ''
         },
-        guarda: {
-            valor: ''
+        guardaValor: {
+            valor_aplicado: '',
+            data: ''
         },
         novo_valor_liquido: '',
         novo_valor_bruto: '',
@@ -55,17 +56,17 @@ export default () => {
             }
         },
         async guarda(investimentoId) {
+            console.log(' Dados que vou enviar:', this.guardaValor);
+            console.log('JSON:', JSON.stringify(this.guarda));
             try {
-                const response = await fetch(`/investimento/${investimentoId}/guarda`, {
+                const response = await fetch(`/investimento/cdb/guarda/${investimentoId}`, {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': this.csrfToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({
-                        guarda_valor: this.guarda.valor
-                    })
+                    body: JSON.stringify(this.guardaValor)
                 })
 
                 let data = await response.json();
@@ -76,8 +77,11 @@ export default () => {
                 }
 
                 if (response.ok) {
-                    this.modal.hide();
-                    this.guarda.valor = '';
+                    this.modal.hide()
+                    this.guardaValor = {
+                        valor_aplicado: '',
+                        data: ''
+                    }
                     this.errors = [];
                     window.location.reload();
                     return;
@@ -117,12 +121,19 @@ export default () => {
             })
         },
         validaGuardaValor() {
-            const input = document.querySelector('#guarda_valor');
-            if (this.errors) {
-                input.classList.add('is-invalid');
-            } else {
-                input.classList.remove('is-invalid');
-            }
+            const fields = ['valor_aplicado', 'data'];
+
+            fields.forEach(field => {
+                const input = document.querySelector(`#${field}`)
+                if (input) {
+                    if (this.errors[field]) {
+                        input.classList.add('is-invalid');
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                }
+            })
+
         },
     }
 }

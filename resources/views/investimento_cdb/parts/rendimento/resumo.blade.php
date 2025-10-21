@@ -1,4 +1,7 @@
-<div class="col-12">
+@php
+    use App\Helpers\FormataMoeda;
+@endphp
+<div class="col-12 mt-3">
     <div class="card">
         <div class="card-header">
             <x-card.title title='Resumo' />

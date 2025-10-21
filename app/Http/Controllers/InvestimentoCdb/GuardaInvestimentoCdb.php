@@ -7,22 +7,24 @@ use App\Models\Investimento;
 use Illuminate\Http\Request;
 use App\Models\InvestimentoExtrato;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class GuardaInvestimentoCdb extends Controller
 {
-    private int $userId;
+    protected int $userId;
 
-    public function __construction()
+    public function __construct()
     {
-        $this->userId = Auth::id();
+        $this->userId = session('user.id');
     }
     public function guarda(Investimento $investimento, Request $request)
     {
-
-        $validator = Validator::make(request()->all(), [
-            'guarda_valor' => 'required|numeric'
+        $validator = Validator::make($request->all(), [
+            'valor_aplicado' => 'required|numeric',
+            'data' => 'required|date|before_or_equal:today'
+        ], [
+            'before_or_equal' => 'Data invalida'
         ]);
 
         if ($validator->fails()) {
@@ -31,36 +33,30 @@ class GuardaInvestimentoCdb extends Controller
             ], 422);
         }
 
-        $valorBruto = $request->input('guarda_valor');
-
         try {
             if ($validator->passes()) {
 
                 Investimento::where('id', $investimento->id)
-                    ->increment('valor_bruto', $valorBruto);
+                    ->increment('valor_bruto', $request->valor_aplicado);
 
                 InvestimentoExtrato::create([
                     'user_id' => $this->userId,
                     'investimento_id' => $investimento->id,
-                    'valor_bruto' => $valorBruto,
-                    'valor_liquid' => 0,
-                    'guardo_perda' => 0,
-                    'ir_iof' => 0,
-                    'movimento' => 'guardo'
-                ]);;
+                    'valor_aplicado' => $request->valor_aplicado,
+                    'movimento' => 'entrada',
+                    'created_at' => $request->data
+                ]);
 
-                $request->session()->flash('success', "R$: $valorBruto reais, guardado com sucesso!");
+                $request->session()->flash('success', "R$: $request->valor_aplicado reais, aplicado com sucesso!");
 
                 return response()->json([
                     'success' => true
                 ], 201);
             }
         } catch (Exception $e) {;
-            if ($validator->fails()) {
-                return response()->json([
-                    'errors' => $validator->errors()->getMessages()
-                ], 422);
-            };
+            return response()->json([
+                'errors' => $validator->errors()->getMessages()
+            ], 500);
         }
     }
 }

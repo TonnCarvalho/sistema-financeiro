@@ -19,7 +19,7 @@ class ExtratoCompletoCdb extends Controller
             ->get();
 
         return view(
-            'investimento.investimento-extrato',
+            'investimento_cdb.parts.show.extrato_completo',
             compact(
                 'investimentoExtrato',
                 'investimentoDetalhe',

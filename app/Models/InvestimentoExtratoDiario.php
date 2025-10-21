@@ -16,6 +16,7 @@ class InvestimentoExtratoDiario extends Model
         'valor_liquido_diario',
         'ganho_perda_diario',
         'ir_iof_diario',
+        'created_at',
     ];
 
     public function investimento(): BelongsTo

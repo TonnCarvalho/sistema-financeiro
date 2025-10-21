@@ -109,25 +109,13 @@
             <button class="btn btn-primary" x-on:click='openModal()'>
                 Guardar
             </button>
-            <a href="{{ route('investimentoCdb.indexAddRendimentoCdb', $investimento->id) }}" class="btn btn-outline-primary">
+            <a href="{{ route('investimentoCdb.indexAddRendimentoCdb', $investimento->id) }}"
+                class="btn btn-outline-primary">
                 Add rendimento</a>
             <button class="btn btn-warning">Resgastar</button>
         </div>
     </div>
 
-    <x-modal.form title="Acrescenta investimento" button='Guardar'
-        action="{{ route('investimentoCbd.guarda', $investimento->id) }}" submit="guarda({{ $investimento->id }})">
-        <x-slot:form>
-            <div>
-                <label for="guarda_valor" class="form-label required">Quanto quer guarda?</label>
-                <input type="text" class="form-control" name="guarda_valor" id="guarda_valor" x-model='guarda.valor'>
-
-                <template x-if='errors.guarda_valor'>
-                    <span class="text-danger">
-                        Campo obrigatório
-                    </span>
-                </template>
-            </div>
-        </x-slot:form>
-    </x-modal.form>
+    @include('investimento_cdb.parts.show.form_guarda')
+    
 </div>

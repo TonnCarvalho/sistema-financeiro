@@ -66,6 +66,7 @@ class InsertRendimentoCdb extends Controller
                 'ir_iof' => $novo_ir_iof,
                 'ganho_perda' => round($novo_ganho_perda, 2),
                 'movimento' => 'rendimento',
+                'created_at' => $input['data'],
             ]);
 
             InvestimentoExtratoDiario::create([
@@ -75,6 +76,7 @@ class InsertRendimentoCdb extends Controller
                 'valor_liquido_diario' => $valor_liquido_diario,
                 'ganho_perda_diario' => $ganho_perda_diario,
                 'ir_iof_diario' => $ir_iof_diario,
+                'created_at' => $input['data']
             ]);
 
             $message = 'Rendimento registrado com sucesso!';

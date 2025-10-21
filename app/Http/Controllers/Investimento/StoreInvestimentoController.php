@@ -58,16 +58,14 @@ class StoreInvestimentoController extends Controller
             $request->session()->flash('success', 'Investimento criado com sucesso!');
 
             return response()->json([
-                'success'
+                'success' => true
             ], 201);
+            
         } catch (Exception $e) {
-
-            if ($validator->fails()) {
-                return response()->json([
-                    'errors' => 'Error interno',
-                    'message' => $e->getMessage()
-                ], 422);
-            }
+            return response()->json([
+                'errors' => 'Error interno',
+                'message' => $e->getMessage()
+            ], 422);
         }
     }
 }
