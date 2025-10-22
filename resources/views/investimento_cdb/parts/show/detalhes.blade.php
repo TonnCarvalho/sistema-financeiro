@@ -111,11 +111,14 @@
             </button>
             <a href="{{ route('investimentoCdb.indexAddRendimentoCdb', $investimento->id) }}"
                 class="btn btn-outline-primary">
-                Add rendimento</a>
-            <button class="btn btn-warning">Resgastar</button>
+                Add rendimento
+            </a>
+            <a href="{{ route('investimentoCdb.resgata', $investimento->id) }}" class="btn btn-warning">
+                Resgastar
+            </a>
         </div>
     </div>
 
     @include('investimento_cdb.parts.show.form_guarda')
-    
+
 </div>
