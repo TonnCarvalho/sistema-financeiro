@@ -6,8 +6,10 @@ use Exception;
 use App\Models\Investimento;
 use Illuminate\Http\Request;
 use App\Models\InvestimentoExtrato;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Models\InvestimentoExtratoDiario;
+use App\Services\ServicesGetInvestimentoValoresAtual;
 use Illuminate\Support\Facades\Validator;
 
 class GuardaInvestimentoCdb extends Controller
@@ -33,26 +35,42 @@ class GuardaInvestimentoCdb extends Controller
             ], 422);
         }
 
+        $investimentoValorAtual = ServicesGetInvestimentoValoresAtual::getValoresAtual($investimento->id);
+        $novo_valor_bruto = $investimentoValorAtual['valor_bruto'] + $request->valor_aplicado;
+        $novo_valor_bruto = $investimentoValorAtual['valor_liquido'] + $request->valor_aplicado;
+
         try {
-            if ($validator->passes()) {
-
-                Investimento::where('id', $investimento->id)
-                    ->increment('valor_bruto', $request->valor_aplicado);
-
-                InvestimentoExtrato::create([
-                    'user_id' => $this->userId,
-                    'investimento_id' => $investimento->id,
-                    'valor_aplicado' => $request->valor_aplicado,
-                    'movimento' => 'entrada',
-                    'created_at' => $request->data
+            Investimento::where('id', $investimento->id)
+                ->incrementEach([
+                    'valor_bruto' => $request->valor_aplicado,
+                    'valor_liquido' => $request->valor_aplicado,
                 ]);
 
-                $request->session()->flash('success', "R$: $request->valor_aplicado reais, aplicado com sucesso!");
+            $investimentoExtrato = InvestimentoExtrato::create([
+                'user_id' => $this->userId,
+                'investimento_id' => $investimento->id,
+                'valor_aplicado' => $request->valor_aplicado,
+                'valor_bruto' => $novo_valor_bruto,
+                'valor_liquido' => $novo_valor_bruto,
+                'ganho_perda' => $investimentoValorAtual['ganho_perda'],
+                'ir_iof' => $investimentoValorAtual['ir_iof'],
+                'movimento' => 'entrada',
+                'created_at' => $request->data
+            ]);
 
-                return response()->json([
-                    'success' => true
-                ], 201);
-            }
+            InvestimentoExtratoDiario::create([
+                'investimento_id' => $investimento->id,
+                'investimento_extrato_id' => $investimentoExtrato->id,
+                'valor_bruto_diario' => $request->valor_aplicado,
+                'valor_liquido_diario' => $request->valor_aplicado,
+                'created_at' => $request->data
+            ]);
+
+            $request->session()->flash('success', "R$: $request->valor_aplicado reais, aplicado com sucesso!");
+
+            return response()->json([
+                'success' => true
+            ], 201);
         } catch (Exception $e) {;
             return response()->json([
                 'errors' => $validator->errors()->getMessages()

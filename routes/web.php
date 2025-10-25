@@ -32,10 +32,10 @@ Route::middleware([IsLogin::class])->group(function () {
 
 //Middleware validação se está logado.
 Route::middleware([NotLogin::class])->group(function () {
+    Route::redirect('/', '/dashboard');
     // Logout
     Route::get('/logout', [LogoutController::class, 'logout'])
         ->name('auth.logout');
-    Route::redirect('/', '/dashboard');
 
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])

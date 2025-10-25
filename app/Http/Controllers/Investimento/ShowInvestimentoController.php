@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ShowInvestimentoController extends Controller
 {
     protected int $userId;
-    
+
     public function __construct()
     {
         $this->userId = Auth::id();
@@ -21,11 +21,11 @@ class ShowInvestimentoController extends Controller
         $investimento = Investimento::with('contaBancaria.banco')
             ->find($id);
 
-        $investimentoExtrato = InvestimentoExtrato::with('investimentoExtratosDiarios')
-            ->where('investimento_id', $id)
-            ->orderBy('created_at', 'DESC')
+        $investimentoExtrato = InvestimentoExtrato::where('investimento_id', $id)
+            ->orderBy('id', 'DESC')
             ->limit(3)
             ->get();
+        // $investimentoExtrato->load('investimentoExtratosDiarios');
 
 
         return view(

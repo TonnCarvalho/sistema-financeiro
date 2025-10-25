@@ -56,8 +56,6 @@ export default () => {
             }
         },
         async guarda(investimentoId) {
-            console.log(' Dados que vou enviar:', this.guardaValor);
-            console.log('JSON:', JSON.stringify(this.guarda));
             try {
                 const response = await fetch(`/investimento/cdb/guarda/${investimentoId}`, {
                     method: 'POST',

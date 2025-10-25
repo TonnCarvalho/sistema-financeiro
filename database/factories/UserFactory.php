@@ -24,9 +24,9 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'firstName' => fake()->firstName(),
-            'lastName' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
+            'firstName' => 'Cleiton',
+            'lastName' => 'Carvalho',
+            'email' => 'cleiton@email.com.br',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('senha'),
             'photo' => 'https://randomuser.me/api/portraits' . '/' . fake()->randomElement(['women', 'men']) . '/' . rand(1, 50) . '.jpg',
