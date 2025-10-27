@@ -42,7 +42,7 @@
                         $isRendimento = $investimentoExtrato->movimento === 'rendimento' ? true : false;
                         $isSaida = $investimentoExtrato->movimento === 'saida' ? true : false;
                     @endphp
-                    {{-- {{ $investimentoExtrato }} --}}
+
                     @foreach ($investimentoExtrato->investimentoExtratosDiarios as $extratoDiario)
                         <div @class([
                             'row',
@@ -57,9 +57,17 @@
                                 <div>
                                     {{ FormataMoeda::formataMoeda($investimentoExtrato->valor_bruto) }}
                                     <br>
-                                    <div class="text-success">
-                                        +{{ FormataMoeda::formataMoeda($extratoDiario?->valor_bruto_diario) }}
-                                    </div>
+
+                                    @if ($investimentoExtrato->movimento === 'saida')
+                                        <div class="text-danger">
+                                            -{{ FormataMoeda::formataMoeda($extratoDiario?->valor_bruto_diario) }}
+                                        </div>
+                                    @else
+                                        <div class="text-success">
+                                            +{{ FormataMoeda::formataMoeda($extratoDiario?->valor_bruto_diario) }}
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                             <div class="col-6 col-md-3 g-2">
@@ -68,9 +76,15 @@
                                 </div>
                                 <div>
                                     {{ FormataMoeda::formataMoeda($investimentoExtrato->valor_liquido) }}
-                                    <div class="text-success">
-                                        +{{ FormataMoeda::formataMoeda($extratoDiario?->valor_liquido_diario) }}
-                                    </div>
+                                    @if ($investimentoExtrato->movimento === 'saida')
+                                        <div class="text-danger">
+                                            -{{ FormataMoeda::formataMoeda($extratoDiario?->valor_liquido_diario) }}
+                                        </div>
+                                    @else
+                                        <div class="text-success">
+                                            +{{ FormataMoeda::formataMoeda($extratoDiario?->valor_liquido_diario) }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-6 col-md-3 g-2">
@@ -79,9 +93,15 @@
                                 </div>
                                 <div>
                                     {{ FormataMoeda::formataMoeda($investimentoExtrato->ganho_perda) }}
-                                    <div class="text-success">
-                                        +{{ FormataMoeda::formataMoeda($extratoDiario?->ganho_perda_diario) }}
-                                    </div>
+                                    @if ($investimentoExtrato->movimento === 'saida')
+                                        <div class="text-danger">
+                                            -{{ FormataMoeda::formataMoeda($extratoDiario?->ganho_perda_diario) }}
+                                        </div>
+                                    @else
+                                        <div class="text-success">
+                                            +{{ FormataMoeda::formataMoeda($extratoDiario?->ganho_perda_diario) }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-6 col-md-3 g-2">
