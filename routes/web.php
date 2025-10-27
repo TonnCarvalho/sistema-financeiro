@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\IndexLoginController;
 use App\Http\Controllers\InvestimentoCdb\ExtratoCompletoCdb;
 use App\Http\Controllers\InvestimentoCdb\InsertRendimentoCdb;
 use App\Http\Controllers\InvestimentoCdb\GuardaInvestimentoCdb;
-use App\Http\Controllers\InvestimentoCdb\IndexAddRendimentoCdb;
+use App\Http\Controllers\InvestimentoCdb\AddRendimentoCdb;
 use App\Http\Controllers\Investimento\ShowInvestimentoController;
 use App\Http\Controllers\Investimento\IndexInvestimentoController;
 use App\Http\Controllers\Investimento\StoreInvestimentoController;
@@ -19,7 +19,7 @@ use App\Http\Controllers\ContaBancaria\IndexContaBancariaController;
 use App\Http\Controllers\ContaBancaria\StoreContaBancariaController;
 use App\Http\Controllers\ContaBancaria\DeleteContaBancariaController;
 use App\Http\Controllers\ContaBancaria\UpdateContaBancariaController;
-use App\Http\Controllers\InvestimentoCdb\ShowResgataInvestimentoCdbController;
+use App\Http\Controllers\InvestimentoCdb\ResgataInvestimentoCdbController;
 
 //Middleware para verificar se já está logado e não ir para pagina de login
 Route::middleware([IsLogin::class])->group(function () {
@@ -70,16 +70,16 @@ Route::middleware([NotLogin::class])->group(function () {
         Route::post('/guarda/{investimento}', [GuardaInvestimentoCdb::class, 'guarda'])
             ->name('investimentoCbd.guarda');
 
-        Route::get('/adiciona/{investimento}', [IndexAddRendimentoCdb::class, 'indexAddRendimentoCdb'])
-            ->name('investimentoCdb.indexAddRendimentoCdb');
+        Route::get('/adiciona/{investimento}', [AddRendimentoCdb::class, 'AddRendimentoCdb'])
+            ->name('investimentoCdb.AddRendimentoCdb');
 
         Route::post('/adiciona/{investimento}', [InsertRendimentoCdb::class, 'insertRendimentoCdb'])
             ->name('investimentoCdb.insertRendimentoCdb');
 
-        Route::get('/resgata/{investimento}', [ShowResgataInvestimentoCdbController::class, 'viewResgata'])
+        Route::get('/resgata/{investimento}', [ResgataInvestimentoCdbController::class, 'viewResgata'])
             ->name('investimentoCdb.resgata');
 
-        Route::post('/resgata/{investimento}', [ShowResgataInvestimentoCdbController::class, 'storeResgata'])
+        Route::post('/resgata/{investimento}', [ResgataInvestimentoCdbController::class, 'storeResgata'])
             ->name('investimentoCdb.storeResgata');
 
         Route::get('/extrato/{investimento}', [ExtratoCompletoCdb::class, 'extratoCompletoCdb'])

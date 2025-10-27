@@ -4,11 +4,12 @@ namespace App\Http\Controllers\InvestimentoCdb;
 
 use App\Models\Investimento;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\InvestimentoExtrato;
+use App\Http\Controllers\Controller;
+use App\Models\InvestimentoExtratoDiario;
 use Illuminate\Support\Facades\Validator;
 
-class ShowResgataInvestimentoCdbController extends Controller
+class ResgataInvestimentoCdbController extends Controller
 {
     protected int $userId;
 
@@ -52,13 +53,21 @@ class ShowResgataInvestimentoCdbController extends Controller
                 'valor_liquido' => $request->resgata_valor,
             ]);
 
-        InvestimentoExtrato::create([
+        $investimentoExtrato = InvestimentoExtrato::create([
             'user_id' => $this->userId,
             'investimento_id' => $investimento->id,
             'valor_aplicado' => '-' . $request->resgata_valor,
+            'valor_bruto' => '-' . $request->resgata_valor,
+            'valor_liquido' => '-' . $request->resgata_valor,
             'movimento' => 'saida'
         ]);
+
+        InvestimentoExtratoDiario::create([
+            'investimento_id' => $investimento->id,
+            'investimento_extrato_id' => $investimentoExtrato->id,
+            'created_at' => $request['data']
+        ]);
         $request->session()->flash('success', "R$: {$request->resgata_valor}  reais resgatado com sucesso!");
-        return redirect()->back();
+        return redirect()->route('investimento.show');
     }
 }

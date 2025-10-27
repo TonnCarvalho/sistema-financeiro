@@ -6,9 +6,9 @@ use App\Models\Investimento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class indexAddRendimentoCdb extends Controller
+class AddRendimentoCdb extends Controller
 {
-    public function indexAddRendimentoCdb(Investimento $investimento, Request $request)
+    public function AddRendimentoCdb(Investimento $investimento, Request $request)
     {
         $investimento = Investimento::with('contaBancaria.banco')
             ->find($investimento->id);

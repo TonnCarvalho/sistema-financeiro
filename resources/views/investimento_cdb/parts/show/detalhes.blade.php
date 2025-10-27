@@ -109,7 +109,7 @@
             <button class="btn btn-primary" x-on:click='openModal()'>
                 Guardar
             </button>
-            <a href="{{ route('investimentoCdb.indexAddRendimentoCdb', $investimento->id) }}"
+            <a href="{{ route('investimentoCdb.AddRendimentoCdb', $investimento->id) }}"
                 class="btn btn-outline-primary">
                 Add rendimento
             </a>
