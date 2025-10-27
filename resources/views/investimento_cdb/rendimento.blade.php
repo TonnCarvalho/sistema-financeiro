@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('investimentoCdb.insertRendimentoCdb', $investimento->id) }}" method="POST">
+                    <form action="{{ route('investimentoCdb.insertAddRendimentoCdb', $investimento->id) }}" method="POST">
                         @csrf
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
@@ -97,8 +97,7 @@
                                     @enderror
                                 </label>
                                 <div class="input-icon">
-                                    <span
-                                        class="input-icon-addon">
+                                    <span class="input-icon-addon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
@@ -113,7 +112,7 @@
                                         </svg>
                                     </span>
                                     <input type="date" class="form-control" name="data" id="datepicker-icon-prepend"
-                                        value="{{old('data', now()->format('Y-m-d')) }}">
+                                        value="{{ old('data', now()->format('Y-m-d')) }}">
 
                                 </div>
                             </div>

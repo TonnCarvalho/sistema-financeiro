@@ -77,11 +77,12 @@ class ResgataInvestimentoCdbController extends Controller
             'investimento_extrato_id' => $investimentoExtrato->id,
             'valor_bruto_diario' => $request->resgata_valor,
             'valor_liquido_diario' => $request->resgata_valor,
+            'movimento' => 'saida',
             'created_at' => $request['data']
         ]);
 
         $request->session()->flash('success', "R$: {$request->resgata_valor}  reais resgatado com sucesso!");
-        
+
         return redirect()->route('investimento.show', $investimento->id);
     }
 }

@@ -37,7 +37,7 @@ class GuardaInvestimentoCdb extends Controller
 
         $investimentoValorAtual = ServicesGetInvestimentoValoresAtual::getValoresAtual($investimento->id);
         $novo_valor_bruto = $investimentoValorAtual['valor_bruto'] + $request->valor_aplicado;
-        $novo_valor_bruto = $investimentoValorAtual['valor_liquido'] + $request->valor_aplicado;
+        $novo_valor_liquido = $investimentoValorAtual['valor_liquido'] + $request->valor_aplicado;
 
         try {
             Investimento::where('id', $investimento->id)
@@ -51,7 +51,7 @@ class GuardaInvestimentoCdb extends Controller
                 'investimento_id' => $investimento->id,
                 'valor_aplicado' => $request->valor_aplicado,
                 'valor_bruto' => $novo_valor_bruto,
-                'valor_liquido' => $novo_valor_bruto,
+                'valor_liquido' => $novo_valor_liquido,
                 'ganho_perda' => $investimentoValorAtual['ganho_perda'],
                 'ir_iof' => $investimentoValorAtual['ir_iof'],
                 'movimento' => 'entrada',
@@ -63,6 +63,7 @@ class GuardaInvestimentoCdb extends Controller
                 'investimento_extrato_id' => $investimentoExtrato->id,
                 'valor_bruto_diario' => $request->valor_aplicado,
                 'valor_liquido_diario' => $request->valor_aplicado,
+                'movimento' => 'entrada',
                 'created_at' => $request->data
             ]);
 

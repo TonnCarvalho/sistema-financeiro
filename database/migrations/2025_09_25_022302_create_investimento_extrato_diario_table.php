@@ -29,6 +29,7 @@ return new class extends Migration
                 ->default(0);
             $table->decimal('ir_iof_diario', '10', '2')
                 ->default(0);
+            $table->enum('movimento', ['entrada', 'rendimento', 'saida'])->default('entrada');
             $table->timestamps();
         });
     }

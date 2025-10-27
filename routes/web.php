@@ -8,7 +8,6 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\AuthLoginController;
 use App\Http\Controllers\Auth\IndexLoginController;
 use App\Http\Controllers\InvestimentoCdb\ExtratoCompletoCdb;
-use App\Http\Controllers\InvestimentoCdb\InsertRendimentoCdb;
 use App\Http\Controllers\InvestimentoCdb\GuardaInvestimentoCdb;
 use App\Http\Controllers\InvestimentoCdb\AddRendimentoCdb;
 use App\Http\Controllers\Investimento\ShowInvestimentoController;
@@ -70,11 +69,11 @@ Route::middleware([NotLogin::class])->group(function () {
         Route::post('/guarda/{investimento}', [GuardaInvestimentoCdb::class, 'guarda'])
             ->name('investimentoCbd.guarda');
 
-        Route::get('/adiciona/{investimento}', [AddRendimentoCdb::class, 'AddRendimentoCdb'])
-            ->name('investimentoCdb.AddRendimentoCdb');
+        Route::get('/adiciona/{investimento}', [AddRendimentoCdb::class, 'ViewAddRendimentoCdb'])
+            ->name('investimentoCdb.ViewAddRendimentoCdb');
 
-        Route::post('/adiciona/{investimento}', [InsertRendimentoCdb::class, 'insertRendimentoCdb'])
-            ->name('investimentoCdb.insertRendimentoCdb');
+        Route::post('/adiciona/{investimento}', [AddRendimentoCdb::class, 'insertAddRendimentoCdb'])
+            ->name('investimentoCdb.insertAddRendimentoCdb');
 
         Route::get('/resgata/{investimento}', [ResgataInvestimentoCdbController::class, 'viewResgata'])
             ->name('investimentoCdb.resgata');
